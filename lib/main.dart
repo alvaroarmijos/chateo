@@ -1,3 +1,5 @@
+import 'package:chateo/src/packages/core/ui/ui.dart';
+import 'package:chateo/src/packages/features/login/login.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -9,12 +11,9 @@ class MainApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
-      home: Scaffold(
-        body: Center(
-          child: Text('Hello World!'),
-        ),
-      ),
+    return MaterialApp(
+      theme: ChateoThemes.light,
+      home: const OnBoardingPage(),
     );
   }
 }
