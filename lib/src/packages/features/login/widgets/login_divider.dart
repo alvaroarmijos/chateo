@@ -2,11 +2,15 @@ import 'package:flutter/material.dart';
 
 import '../../../core/ui/ui.dart';
 
-class OnboardingDividier extends StatelessWidget {
-  const OnboardingDividier({super.key});
+class LoginDivider extends StatelessWidget {
+  const LoginDivider({super.key, this.color});
+
+  final Color? color;
 
   @override
   Widget build(BuildContext context) {
+    final textColor = color ?? ChateoColors.grey;
+
     return Row(
       children: [
         const Flexible(
@@ -18,8 +22,8 @@ class OnboardingDividier extends StatelessWidget {
             'OR',
             style: Theme.of(context)
                 .textTheme
-                .labelLarge
-                ?.copyWith(color: ChateoColors.grey),
+                .labelMedium
+                ?.copyWith(color: textColor),
           ),
         ),
         const Flexible(

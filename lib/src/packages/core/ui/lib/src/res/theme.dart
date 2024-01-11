@@ -8,13 +8,16 @@ class ChateoThemes {
     primary: ChateoColors.primary,
   );
 
-  static const TextTheme _textTheme = TextTheme(
-    displayLarge: TextStyle(
-      fontSize: 70,
-      color: Colors.black,
-      fontWeight: FontWeight.w400,
-    ),
-  );
+  static final TextTheme _textTheme = TextTheme(
+      displayLarge: const TextStyle(
+        fontSize: 70,
+        color: Colors.black,
+        fontWeight: FontWeight.w400,
+      ),
+      labelLarge: TextStyle(
+          fontSize: 18,
+          color: ChateoColors.black,
+          fontWeight: FontWeight.bold));
 
   static final _dividerThemeData = DividerThemeData(
     color: ChateoColors.lightGrey.withOpacity(0.4),
@@ -42,14 +45,38 @@ class ChateoThemes {
     style: _elevatedButtonTheme,
   );
 
+  static final _appBarTheme = AppBarTheme(
+      iconTheme: IconThemeData(
+    color: ChateoColors.black,
+  ));
+
+  static final _inputDecorationTheme = InputDecorationTheme(
+    labelStyle: TextStyle(
+      color: _colorSchemeLight.primary,
+      fontWeight: FontWeight.normal,
+      fontSize: 14,
+    ),
+    border: UnderlineInputBorder(
+      borderSide: BorderSide(
+        color: _colorSchemeLight.primary,
+      ),
+    ),
+    enabledBorder: UnderlineInputBorder(
+      borderSide: BorderSide(
+        color: _colorSchemeLight.primary,
+      ),
+    ),
+  );
+
   static ThemeData get light {
     return ThemeData.from(
       colorScheme: _colorSchemeLight,
       useMaterial3: true,
       textTheme: _textTheme,
     ).copyWith(
-      dividerTheme: _dividerThemeData,
-      elevatedButtonTheme: _elevatedButtonThemeData,
-    );
+        dividerTheme: _dividerThemeData,
+        elevatedButtonTheme: _elevatedButtonThemeData,
+        appBarTheme: _appBarTheme,
+        inputDecorationTheme: _inputDecorationTheme);
   }
 }
