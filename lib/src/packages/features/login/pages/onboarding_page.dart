@@ -2,6 +2,7 @@ import 'package:chateo/src/packages/core/ui/ui.dart';
 import 'package:chateo/src/packages/features/login/pages/sign_in_page.dart';
 import 'package:chateo/src/packages/features/login/widgets/login_divider.dart';
 import 'package:chateo/src/packages/features/login/widgets/onboarding_button.dart';
+import 'package:chateo/src/packages/features/login/widgets/social_media_button.dart';
 import 'package:flutter/material.dart';
 
 class OnBoardingPage extends StatelessWidget {
@@ -54,11 +55,20 @@ class OnBoardingPage extends StatelessWidget {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Image.asset(ChateoDrawables.getFacebookIconDrawable()),
+                        SocialMediaButton(
+                          icon: ChateoDrawables.getFacebookIconDrawable(),
+                          onTap: () {},
+                        ),
                         const SizedBox(width: ChateoDimens.dimen_20),
-                        Image.asset(ChateoDrawables.getGoogleIconDrawable()),
+                        SocialMediaButton(
+                          icon: ChateoDrawables.getGoogleIconDrawable(),
+                          onTap: () {},
+                        ),
                         const SizedBox(width: ChateoDimens.dimen_20),
-                        Image.asset(ChateoDrawables.getAppleIconDrawable()),
+                        SocialMediaButton(
+                          icon: ChateoDrawables.getAppleIconDrawable(),
+                          onTap: () {},
+                        ),
                       ],
                     ),
                   ),

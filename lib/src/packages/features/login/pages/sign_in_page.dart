@@ -1,5 +1,6 @@
 import 'package:chateo/src/packages/core/ui/ui.dart';
 import 'package:chateo/src/packages/features/login/widgets/login_divider.dart';
+import 'package:chateo/src/packages/features/login/widgets/social_media_button.dart';
 import 'package:flutter/material.dart';
 
 class SignInPage extends StatelessWidget {
@@ -49,11 +50,23 @@ class SignInPage extends StatelessWidget {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Image.asset(ChateoDrawables.getFacebookIconDrawable()),
+                    SocialMediaButton(
+                      icon: ChateoDrawables.getFacebookIconDrawable(),
+                      borderColor: ChateoColors.black,
+                      onTap: () {},
+                    ),
                     const SizedBox(width: ChateoDimens.dimen_20),
-                    Image.asset(ChateoDrawables.getGoogleIconDrawable()),
+                    SocialMediaButton(
+                      icon: ChateoDrawables.getGoogleIconDrawable(),
+                      borderColor: ChateoColors.black,
+                      onTap: () {},
+                    ),
                     const SizedBox(width: ChateoDimens.dimen_20),
-                    Image.asset(ChateoDrawables.getAppleDarkIconDrawable()),
+                    SocialMediaButton(
+                      icon: ChateoDrawables.getAppleDarkIconDrawable(),
+                      borderColor: ChateoColors.black,
+                      onTap: () {},
+                    ),
                   ],
                 ),
               ),
@@ -62,6 +75,7 @@ class SignInPage extends StatelessWidget {
               ),
               TextFormField(
                 textInputAction: TextInputAction.next,
+                keyboardType: TextInputType.emailAddress,
                 decoration: const InputDecoration(
                   label: Text('Your email'),
                 ),
@@ -69,11 +83,12 @@ class SignInPage extends StatelessWidget {
               const SizedBox(height: ChateoDimens.dimen_16),
               TextFormField(
                 textInputAction: TextInputAction.done,
+                obscureText: true,
                 decoration: const InputDecoration(
                   label: Text('Password'),
                 ),
               ),
-              const SizedBox(height: ChateoDimens.dimen_72),
+              const SizedBox(height: ChateoDimens.dimen_92),
             ],
           ),
           Align(
@@ -81,9 +96,13 @@ class SignInPage extends StatelessWidget {
             child: Container(
               color: Colors.white,
               width: double.infinity,
-              child: const Padding(
-                padding: EdgeInsets.all(ChateoDimens.dimen_20),
-                child: ElevatedButton(
+              child: Padding(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: ChateoDimens.dimen_20,
+                ).copyWith(
+                  bottom: ChateoDimens.dimen_48,
+                ),
+                child: const ElevatedButton(
                   onPressed: null,
                   child: Text('Log in'),
                 ),
