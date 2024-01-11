@@ -1,4 +1,5 @@
 import 'package:chateo/src/packages/core/ui/ui.dart';
+import 'package:chateo/src/packages/features/login/pages/sign_in_page.dart';
 import 'package:chateo/src/packages/features/login/widgets/onboarding_button.dart';
 import 'package:chateo/src/packages/features/login/widgets/onboarding_divider.dart';
 import 'package:flutter/material.dart';
@@ -14,7 +15,12 @@ class OnBoardingPage extends StatelessWidget {
       backgroundColor: Colors.black,
       body: Stack(
         children: [
-          Image.asset(ChateoDrawables.getOnboardingBackgroundDrawable()),
+          Align(
+            alignment: Alignment.topRight,
+            child: Image.asset(
+              ChateoDrawables.getOnboardingBackgroundDrawable(),
+            ),
+          ),
           SafeArea(
             child: Padding(
               padding: const EdgeInsets.all(ChateoDimens.dimen_20),
@@ -58,7 +64,12 @@ class OnBoardingPage extends StatelessWidget {
                   ),
                   const OnboardingDividier(),
                   OnboardingButton(
-                    onTap: () {},
+                    onTap: () => Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const SignInPage(),
+                      ),
+                    ),
                   ),
                   const SizedBox(
                     height: ChateoDimens.dimen_20,
