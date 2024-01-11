@@ -58,12 +58,17 @@ class ChateoThemes {
     ),
     border: UnderlineInputBorder(
       borderSide: BorderSide(
-        color: _colorSchemeLight.primary,
+        color: ChateoColors.lightGrey,
       ),
     ),
     enabledBorder: UnderlineInputBorder(
       borderSide: BorderSide(
-        color: _colorSchemeLight.primary,
+        color: ChateoColors.lightGrey,
+      ),
+    ),
+    focusedBorder: UnderlineInputBorder(
+      borderSide: BorderSide(
+        color: ChateoColors.lightGrey,
       ),
     ),
   );

@@ -1,5 +1,5 @@
 import 'package:chateo/src/packages/core/ui/ui.dart';
-import 'package:chateo/src/packages/features/login/pages/sign_in_page.dart';
+import 'package:chateo/src/packages/features/login/login.dart';
 import 'package:chateo/src/packages/features/login/widgets/login_divider.dart';
 import 'package:chateo/src/packages/features/login/widgets/onboarding_button.dart';
 import 'package:chateo/src/packages/features/login/widgets/social_media_button.dart';
@@ -85,7 +85,12 @@ class OnBoardingPage extends StatelessWidget {
                     height: ChateoDimens.dimen_20,
                   ),
                   TextButton(
-                    onPressed: () {},
+                    onPressed: () => Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const LogInPage(),
+                      ),
+                    ),
                     child: RichText(
                       text: TextSpan(
                         text: 'Existing account? ',
