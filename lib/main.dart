@@ -3,9 +3,14 @@ import 'package:chateo/src/packages/core/ui/ui.dart';
 import 'package:chateo/src/packages/features/login/login.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+
+import './src/app/di/di.dart' as di;
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+
+  await di.init();
 
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
@@ -19,10 +24,13 @@ class MainApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      theme: ChateoThemes.light,
-      home: const OnBoardingPage(),
+    return BlocProvider(
+      create: (context) => di.sl<LoginBloc>(),
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        theme: ChateoThemes.light,
+        home: const OnBoardingPage(),
+      ),
     );
   }
 }

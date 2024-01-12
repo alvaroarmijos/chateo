@@ -4,6 +4,7 @@ import 'package:chateo/src/packages/features/login/widgets/login_divider.dart';
 import 'package:chateo/src/packages/features/login/widgets/onboarding_button.dart';
 import 'package:chateo/src/packages/features/login/widgets/social_media_button.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class OnBoardingPage extends StatelessWidget {
   const OnBoardingPage({super.key});
@@ -62,7 +63,9 @@ class OnBoardingPage extends StatelessWidget {
                         const SizedBox(width: ChateoDimens.dimen_20),
                         SocialMediaButton(
                           icon: ChateoDrawables.getGoogleIconDrawable(),
-                          onTap: () {},
+                          onTap: () => context
+                              .read<LoginBloc>()
+                              .add(const LogInWithGoogleEvent()),
                         ),
                         const SizedBox(width: ChateoDimens.dimen_20),
                         SocialMediaButton(
