@@ -1,21 +1,63 @@
 part of 'sign_up_bloc.dart';
 
-sealed class SignUpState {
-  const SignUpState();
+enum Status {
+  initial,
+  loading,
+  success,
+  error,
 }
 
-final class InitialState implements SignUpState {
-  const InitialState();
-}
+final class SignUpState extends Equatable {
+  const SignUpState({
+    this.status = Status.initial,
+    this.name,
+    this.email,
+    this.password,
+    this.confirm,
+    this.error,
+  });
 
-final class LoadingState implements SignUpState {
-  const LoadingState();
-}
+  final Status status;
+  final String? name;
+  final String? email;
+  final String? password;
+  final String? confirm;
+  final Object? error;
 
-final class SuccessState implements SignUpState {
-  const SuccessState();
-}
+  bool get showCreateAccountButton => ((name?.isNotEmpty ?? false) &&
+      (email?.isNotEmpty ?? false) &&
+      (password?.isNotEmpty ?? false) &&
+      (confirm?.isNotEmpty ?? false));
 
-final class ErrorState implements SignUpState {
-  const ErrorState();
+  bool get showErrorEmail =>
+      error != null ? error is InvalidEmailException : false;
+
+  bool get showErrorConfirm =>
+      error != null ? error is InvalidPasswordConfirmationException : false;
+
+  SignUpState copyWith({
+    final Status? status,
+    final String? name,
+    final String? email,
+    final String? password,
+    final String? confirm,
+    final Object? error,
+  }) =>
+      SignUpState(
+        status: status ?? this.status,
+        name: name ?? this.name,
+        email: email ?? this.email,
+        password: password ?? this.password,
+        confirm: confirm ?? this.confirm,
+        error: error ?? this.error,
+      );
+
+  @override
+  List<Object?> get props => [
+        status,
+        name,
+        email,
+        password,
+        confirm,
+      ];
 }

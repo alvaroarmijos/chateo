@@ -14,6 +14,11 @@ Future<void> init() async {
   sl.registerLazySingleton(() => GetUserUseCase(sl()));
   sl.registerLazySingleton(() => LogInUseCase(sl()));
   sl.registerLazySingleton(() => LogOutUseCase(sl()));
+  sl.registerLazySingleton(() => SignUpUseCase(sl(), sl(), sl()));
+
+  /// Domain
+  sl.registerLazySingleton(() => const EmailValidator());
+  sl.registerLazySingleton(() => const PasswordValidator());
 
   /// Infrastructure
   sl.registerLazySingleton(() => const UserMapper());
@@ -25,6 +30,10 @@ Future<void> init() async {
   /// Login
   /// //Bloc
   sl.registerFactory(() => LoginBloc(sl()));
+
+  /// SignUp
+  /// //Bloc
+  sl.registerFactory(() => SignUpBloc(sl()));
 
   //External
   sl.registerLazySingleton(() => FirebaseAuth.instance);

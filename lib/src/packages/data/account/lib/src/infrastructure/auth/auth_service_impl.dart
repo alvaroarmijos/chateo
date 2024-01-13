@@ -24,4 +24,16 @@ class AuthServiceImpl implements AuthService {
   Stream<User?> getUser() => _apiClient
       .getUser()
       .map((user) => user == null ? null : _userMapper.fromApiDto(user));
+
+  @override
+  Future<void> signUp(
+    String email,
+    String password,
+    String name,
+  ) =>
+      _apiClient.signUp(
+        email,
+        password,
+        name,
+      );
 }

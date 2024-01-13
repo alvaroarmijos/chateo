@@ -1,3 +1,4 @@
+import 'package:chateo/src/packages/data/account/lib/src/domain/auth/login_with_email_exception.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
@@ -32,6 +33,26 @@ class AccountApiClient {
         _instance.signOut(),
         _provider.signOut(),
       ]);
+
+  Future<UserCredential> signUp(
+    String email,
+    String password,
+    String name,
+  ) async {
+    try {
+      // Once signed in, return the UserCredential
+      final userCredential = await _instance.createUserWithEmailAndPassword(
+          email: email, password: password);
+
+      await userCredential.user?.updateDisplayName(name);
+
+      return userCredential;
+    } on FirebaseAuthException catch (e) {
+      throw LogInWithEmailAndPasswordException.fromCode(e.code);
+    } catch (_) {
+      throw const LogInWithEmailAndPasswordException();
+    }
+  }
 
   Stream<User?> getUser() => _instance.authStateChanges();
 }

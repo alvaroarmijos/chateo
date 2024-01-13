@@ -80,7 +80,7 @@ class OnBoardingPage extends StatelessWidget {
                     onTap: () => Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => const SignInPage(),
+                        builder: (context) => const SignUpPage(),
                       ),
                     ),
                   ),
