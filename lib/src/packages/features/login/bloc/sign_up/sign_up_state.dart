@@ -7,7 +7,7 @@ enum Status {
   error,
 }
 
-final class SignUpState extends Equatable {
+final class SignUpState {
   const SignUpState({
     this.status = Status.initial,
     this.name,
@@ -51,13 +51,4 @@ final class SignUpState extends Equatable {
         confirm: confirm ?? this.confirm,
         error: error ?? this.error,
       );
-
-  @override
-  List<Object?> get props => [
-        status,
-        name,
-        email,
-        password,
-        confirm,
-      ];
 }

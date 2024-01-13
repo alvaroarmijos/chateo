@@ -183,8 +183,8 @@ class _SignUpPageState extends State<SignUpPage> {
   }
 
   void _listenState(BuildContext context, SignUpState state) {
-    if (state.error is LogInWithEmailAndPasswordException) {
-      final msg = (state.error as LogInWithEmailAndPasswordException).message;
+    if (state.error is SignUpWithEmailAndPasswordException) {
+      final msg = (state.error as SignUpWithEmailAndPasswordException).message;
       Fluttertoast.showToast(msg: msg);
     }
   }
