@@ -1,23 +1,34 @@
-// ignore_for_file: void_checks
-
 part of 'login_bloc.dart';
 
-sealed class LoginState {
-  const LoginState();
-}
+final class LoginState {
+  const LoginState({
+    this.status = Status.initial,
+    this.email,
+    this.password,
+    this.error,
+  });
 
-final class InitialState implements LoginState {
-  const InitialState();
-}
+  final Status status;
+  final String? email;
+  final String? password;
+  final Object? error;
 
-final class LoadingState implements LoginState {
-  const LoadingState();
-}
+  bool get showLogInButton =>
+      ((email?.isNotEmpty ?? false) && (password?.isNotEmpty ?? false));
 
-final class SuccessState implements LoginState {
-  const SuccessState();
-}
+  bool get showErrorEmail =>
+      error != null ? error is InvalidEmailException : false;
 
-final class ErrorState implements LoginState {
-  const ErrorState();
+  LoginState copyWith({
+    final Status? status,
+    final String? email,
+    final String? password,
+    final Object? error,
+  }) =>
+      LoginState(
+        status: status ?? this.status,
+        email: email ?? this.email,
+        password: password ?? this.password,
+        error: error ?? this.error,
+      );
 }

@@ -1,5 +1,7 @@
 import 'dart:async';
 
+import 'package:chateo/src/packages/core/ui/ui.dart';
+import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../data/account/account.dart';
@@ -8,22 +10,43 @@ part 'login_event.dart';
 part 'login_state.dart';
 
 class LoginBloc extends Bloc<LoginEvent, LoginState> {
-  final LogInUseCase _login;
-
   LoginBloc(
-    this._login,
-  ) : super(const InitialState()) {
-    on<LogInWithGoogleEvent>(_onLogInWithGoogleEvent);
+    this._logInWithEmailAndPasswordUseCase,
+  ) : super(const LoginState()) {
+    on<LogInWithEmailAndPasswordEvent>(_onLogInWithEmailAndPasswordEvent);
+    on<ChangeEmailLoginEvent>(_onChangeEmailLoginEvent);
+    on<ChangePasswordLoginEvent>(_onChangePasswordLoginEvent);
   }
 
-  FutureOr<void> _onLogInWithGoogleEvent(
-    LogInWithGoogleEvent event,
+  final LogInWithEmailAndPasswordUseCase _logInWithEmailAndPasswordUseCase;
+
+  FutureOr<void> _onLogInWithEmailAndPasswordEvent(
+    LogInWithEmailAndPasswordEvent event,
     Emitter emit,
   ) async {
+    emit(state.copyWith(status: Status.loading, error: Object()));
     return emit.forEach<void>(
-      _login().asStream(),
-      onData: (value) => const SuccessState(),
-      onError: (_, __) => const ErrorState(),
+      _logInWithEmailAndPasswordUseCase(
+        state.email!,
+        state.password!,
+      ).asStream(),
+      onData: (value) => state.copyWith(status: Status.success),
+      onError: (error, __) =>
+          state.copyWith(status: Status.error, error: error),
     );
+  }
+
+  FutureOr<void> _onChangeEmailLoginEvent(
+    ChangeEmailLoginEvent event,
+    Emitter<LoginState> emit,
+  ) {
+    emit(state.copyWith(email: event.email, error: Object()));
+  }
+
+  FutureOr<void> _onChangePasswordLoginEvent(
+    ChangePasswordLoginEvent event,
+    Emitter<LoginState> emit,
+  ) {
+    emit(state.copyWith(password: event.password, error: Object()));
   }
 }

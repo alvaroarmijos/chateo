@@ -12,7 +12,8 @@ Future<void> init() async {
   /// UseCases
   sl.registerLazySingleton(() => CheckUserLoginUseCase(sl()));
   sl.registerLazySingleton(() => GetUserUseCase(sl()));
-  sl.registerLazySingleton(() => LogInUseCase(sl()));
+  sl.registerLazySingleton(() => LogInWithGoogleUseCase(sl()));
+  sl.registerLazySingleton(() => LogInWithEmailAndPasswordUseCase(sl(), sl()));
   sl.registerLazySingleton(() => LogOutUseCase(sl()));
   sl.registerLazySingleton(() => SignUpUseCase(sl(), sl(), sl()));
 
@@ -30,6 +31,10 @@ Future<void> init() async {
   /// Login
   /// //Bloc
   sl.registerFactory(() => LoginBloc(sl()));
+
+  /// SignIn
+  /// //Bloc
+  sl.registerFactory(() => SignInBloc(sl()));
 
   /// SignUp
   /// //Bloc

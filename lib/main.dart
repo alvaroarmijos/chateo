@@ -27,10 +27,13 @@ class MainApp extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider(
-          create: (context) => di.sl<LoginBloc>(),
+          create: (context) => di.sl<SignInBloc>(),
         ),
         BlocProvider(
           create: (context) => di.sl<SignUpBloc>(),
+        ),
+        BlocProvider(
+          create: (context) => di.sl<LoginBloc>(),
         ),
       ],
       child: MaterialApp(

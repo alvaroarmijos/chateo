@@ -1,5 +1,3 @@
-// import 'package:firebase_auth/firebase_auth.dart';
-
 import '../../domain/auth/auth_service.dart';
 import '../../domain/user/user.dart';
 import '../api_client.dart';
@@ -15,7 +13,7 @@ class AuthServiceImpl implements AuthService {
   );
 
   @override
-  Future<void> logIn() => _apiClient.signInWithGoogle();
+  Future<void> logInWithGoogle() => _apiClient.signInWithGoogle();
 
   @override
   Future<void> logOut() => _apiClient.signOut();
@@ -35,5 +33,15 @@ class AuthServiceImpl implements AuthService {
         email,
         password,
         name,
+      );
+
+  @override
+  Future<void> logInWithEmailAndPassword(
+    String email,
+    String password,
+  ) =>
+      _apiClient.logInWithEmailAndPassword(
+        email,
+        password,
       );
 }

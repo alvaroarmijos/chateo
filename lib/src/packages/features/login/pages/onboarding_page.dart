@@ -64,7 +64,7 @@ class OnBoardingPage extends StatelessWidget {
                         SocialMediaButton(
                           icon: ChateoDrawables.getGoogleIconDrawable(),
                           onTap: () => context
-                              .read<LoginBloc>()
+                              .read<SignInBloc>()
                               .add(const LogInWithGoogleEvent()),
                         ),
                         const SizedBox(width: ChateoDimens.dimen_20),

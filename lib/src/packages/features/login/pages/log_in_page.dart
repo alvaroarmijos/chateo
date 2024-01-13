@@ -1,7 +1,11 @@
 import 'package:chateo/src/packages/core/ui/ui.dart';
+import 'package:chateo/src/packages/data/account/account.dart';
+import 'package:chateo/src/packages/features/login/login.dart';
 import 'package:chateo/src/packages/features/login/widgets/login_divider.dart';
 import 'package:chateo/src/packages/features/login/widgets/social_media_button.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 class LogInPage extends StatelessWidget {
   const LogInPage({super.key});
@@ -10,6 +14,7 @@ class LogInPage extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final textTheme = theme.textTheme;
+    final bloc = context.read<LoginBloc>();
 
     return Scaffold(
       appBar: AppBar(),
@@ -74,16 +79,38 @@ class LogInPage extends StatelessWidget {
               LoginDivider(
                 color: ChateoColors.darkGrey,
               ),
-              TextFormField(
-                textInputAction: TextInputAction.next,
-                keyboardType: TextInputType.emailAddress,
-                decoration: const InputDecoration(
-                  label: Text('Your email'),
-                ),
+              BlocBuilder<LoginBloc, LoginState>(
+                builder: (context, state) {
+                  return TextFormField(
+                    textInputAction: TextInputAction.next,
+                    onChanged: (value) =>
+                        bloc.add(ChangeEmailLoginEvent(value)),
+                    keyboardType: TextInputType.emailAddress,
+                    decoration: InputDecoration(
+                      label: const Text('Your email'),
+                      error: state.showErrorEmail
+                          ? const Row(
+                              mainAxisAlignment: MainAxisAlignment.end,
+                              children: [
+                                Text(
+                                  "Invalid email address",
+                                  style: TextStyle(
+                                    color: Colors.red,
+                                    fontSize: 12,
+                                  ),
+                                  textAlign: TextAlign.left,
+                                ),
+                              ],
+                            )
+                          : null,
+                    ),
+                  );
+                },
               ),
               const SizedBox(height: ChateoDimens.dimen_16),
               TextFormField(
                 textInputAction: TextInputAction.done,
+                onChanged: (value) => bloc.add(ChangePasswordLoginEvent(value)),
                 obscureText: true,
                 decoration: const InputDecoration(
                   label: Text('Password'),
@@ -103,9 +130,25 @@ class LogInPage extends StatelessWidget {
                 ).copyWith(
                   bottom: ChateoDimens.dimen_48,
                 ),
-                child: const ElevatedButton(
-                  onPressed: null,
-                  child: Text('Log in'),
+                child: BlocConsumer<LoginBloc, LoginState>(
+                  listener: _listenState,
+                  builder: (context, state) {
+                    if (state.status == Status.loading) {
+                      return const SizedBox(
+                        height: 100,
+                        child: Center(
+                          child: CircularProgressIndicator(),
+                        ),
+                      );
+                    }
+                    return ElevatedButton(
+                      onPressed: state.showLogInButton
+                          ? () =>
+                              bloc.add(const LogInWithEmailAndPasswordEvent())
+                          : null,
+                      child: const Text('Log in'),
+                    );
+                  },
                 ),
               ),
             ),
@@ -113,5 +156,12 @@ class LogInPage extends StatelessWidget {
         ],
       ),
     );
+  }
+
+  void _listenState(BuildContext context, LoginState state) {
+    if (state.error is LogInWithEmailAndPasswordException) {
+      final msg = (state.error as LogInWithEmailAndPasswordException).message;
+      Fluttertoast.showToast(msg: msg);
+    }
   }
 }

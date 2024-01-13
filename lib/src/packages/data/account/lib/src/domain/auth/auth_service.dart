@@ -1,7 +1,12 @@
 import '../user/user.dart';
 
 abstract class AuthService {
-  Future<void> logIn();
+  Future<void> logInWithGoogle();
+
+  Future<void> logInWithEmailAndPassword(
+    String email,
+    String password,
+  );
 
   Future<void> signUp(
     String email,

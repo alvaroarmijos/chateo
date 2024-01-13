@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:chateo/src/packages/core/ui/ui.dart';
 import 'package:chateo/src/packages/data/account/account.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -24,6 +25,7 @@ class SignUpBloc extends Bloc<SignUpEvent, SignUpState> {
     CreateAccountEvent event,
     Emitter emit,
   ) async {
+    emit(state.copyWith(status: Status.loading, error: Object()));
     return emit.forEach<void>(
       _signUpUseCase(
         state.email,

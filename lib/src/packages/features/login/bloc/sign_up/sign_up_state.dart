@@ -1,12 +1,5 @@
 part of 'sign_up_bloc.dart';
 
-enum Status {
-  initial,
-  loading,
-  success,
-  error,
-}
-
 final class SignUpState {
   const SignUpState({
     this.status = Status.initial,

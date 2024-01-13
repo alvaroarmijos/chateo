@@ -166,6 +166,14 @@ class _SignUpPageState extends State<SignUpPage> {
                 child: BlocConsumer<SignUpBloc, SignUpState>(
                   listener: _listenState,
                   builder: (context, state) {
+                    if (state.status == Status.loading) {
+                      return const SizedBox(
+                        height: 100,
+                        child: Center(
+                          child: CircularProgressIndicator(),
+                        ),
+                      );
+                    }
                     return ElevatedButton(
                       onPressed: state.showCreateAccountButton
                           ? () => _bloc.add(const CreateAccountEvent())
