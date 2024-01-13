@@ -14,6 +14,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "1041851523256-83rjj5rtemq4g1674t8bms93qtm7cbpf.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.chateo",
+            "certificate_hash": "9f1a9ecf461c71543b7b8d70d39a150b139cf9be"
+          }
+        },
+        {
           "client_id": "1041851523256-djpsf0698hu8vd722sobi611inmbhkdf.apps.googleusercontent.com",
           "client_type": 3
         }

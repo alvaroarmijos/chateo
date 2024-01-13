@@ -1,3 +1,4 @@
+import 'package:chateo/src/app/navigator/app_navigator.dart';
 import 'package:chateo/src/packages/core/ui/ui.dart';
 import 'package:chateo/src/packages/features/login/login.dart';
 import 'package:chateo/src/packages/features/login/widgets/login_divider.dart';
@@ -53,47 +54,38 @@ class OnBoardingPage extends StatelessWidget {
                     padding: const EdgeInsets.symmetric(
                       vertical: ChateoDimens.dimen_12,
                     ),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        SocialMediaButton(
-                          icon: ChateoDrawables.getFacebookIconDrawable(),
-                          onTap: () {},
-                        ),
-                        const SizedBox(width: ChateoDimens.dimen_20),
-                        SocialMediaButton(
-                          icon: ChateoDrawables.getGoogleIconDrawable(),
-                          onTap: () => context
-                              .read<SignInBloc>()
-                              .add(const LogInWithGoogleEvent()),
-                        ),
-                        const SizedBox(width: ChateoDimens.dimen_20),
-                        SocialMediaButton(
-                          icon: ChateoDrawables.getAppleIconDrawable(),
-                          onTap: () {},
-                        ),
-                      ],
+                    child: SocialMediaButton(
+                      icon: ChateoDrawables.getGoogleIconDrawable(),
+                      onTap: () => context
+                          .read<SignInBloc>()
+                          .add(const LogInWithGoogleEvent()),
                     ),
+                    //  Row(
+                    //   mainAxisAlignment: MainAxisAlignment.center,
+                    //   children: [
+                    //     // SocialMediaButton(
+                    //     //   icon: ChateoDrawables.getFacebookIconDrawable(),
+                    //     //   onTap: () {},
+                    //     // ),
+                    //     // const SizedBox(width: ChateoDimens.dimen_20),
+
+                    //     // const SizedBox(width: ChateoDimens.dimen_20),
+                    //     // SocialMediaButton(
+                    //     //   icon: ChateoDrawables.getAppleIconDrawable(),
+                    //     //   onTap: () {},
+                    //     // ),
+                    //   ],
+                    // ),
                   ),
                   const LoginDivider(),
                   OnboardingButton(
-                    onTap: () => Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => const SignUpPage(),
-                      ),
-                    ),
+                    onTap: () => AppNavigator.navigateToSignUp(context),
                   ),
                   const SizedBox(
                     height: ChateoDimens.dimen_20,
                   ),
                   TextButton(
-                    onPressed: () => Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => const LogInPage(),
-                      ),
-                    ),
+                    onPressed: () => AppNavigator.navigateToLogIn(context),
                     child: RichText(
                       text: TextSpan(
                         text: 'Existing account? ',

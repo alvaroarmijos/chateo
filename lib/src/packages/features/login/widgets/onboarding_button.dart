@@ -36,7 +36,7 @@ class OnboardingButton extends StatelessWidget {
         ),
         child: ElevatedButton(
           onPressed: onTap,
-          child: const Text('Sign up withn mail'),
+          child: const Text('Sign up with mail'),
         ),
       ),
     );

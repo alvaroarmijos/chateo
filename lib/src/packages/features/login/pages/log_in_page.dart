@@ -49,31 +49,42 @@ class LogInPage extends StatelessWidget {
                 ),
                 textAlign: TextAlign.center,
               ),
-              Padding(
-                padding: const EdgeInsets.symmetric(
-                  vertical: ChateoDimens.dimen_24,
-                ),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    SocialMediaButton(
-                      icon: ChateoDrawables.getFacebookIconDrawable(),
-                      borderColor: ChateoColors.black,
-                      onTap: () {},
-                    ),
-                    const SizedBox(width: ChateoDimens.dimen_20),
-                    SocialMediaButton(
-                      icon: ChateoDrawables.getGoogleIconDrawable(),
-                      borderColor: ChateoColors.black,
-                      onTap: () {},
-                    ),
-                    const SizedBox(width: ChateoDimens.dimen_20),
-                    SocialMediaButton(
-                      icon: ChateoDrawables.getAppleDarkIconDrawable(),
-                      borderColor: ChateoColors.black,
-                      onTap: () {},
-                    ),
-                  ],
+              SizedBox(
+                height: ChateoDimens.dimen_96,
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(
+                    vertical: ChateoDimens.dimen_24,
+                  ),
+                  child: SocialMediaButton(
+                    icon: ChateoDrawables.getGoogleIconDrawable(),
+                    borderColor: ChateoColors.black,
+                    onTap: () => context
+                        .read<SignInBloc>()
+                        .add(const LogInWithGoogleEvent()),
+                  ),
+
+                  // Row(
+                  //   mainAxisAlignment: MainAxisAlignment.center,
+                  //   children: [
+                  //     SocialMediaButton(
+                  //       icon: ChateoDrawables.getFacebookIconDrawable(),
+                  //       borderColor: ChateoColors.black,
+                  //       onTap: () {},
+                  //     ),
+                  //     const SizedBox(width: ChateoDimens.dimen_20),
+                  //     SocialMediaButton(
+                  //       icon: ChateoDrawables.getGoogleIconDrawable(),
+                  //       borderColor: ChateoColors.black,
+                  //       onTap: () {},
+                  //     ),
+                  //     const SizedBox(width: ChateoDimens.dimen_20),
+                  //     SocialMediaButton(
+                  //       icon: ChateoDrawables.getAppleDarkIconDrawable(),
+                  //       borderColor: ChateoColors.black,
+                  //       onTap: () {},
+                  //     ),
+                  //   ],
+                  // ),
                 ),
               ),
               LoginDivider(

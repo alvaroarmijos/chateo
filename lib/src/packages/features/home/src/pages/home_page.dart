@@ -1,5 +1,6 @@
-import 'package:chateo/src/packages/core/ui/lib/src/res/colors.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -7,9 +8,16 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: ChateoColors.black,
-      body: const Center(
-        child: Text('Home Page'),
+      // backgroundColor: ChateoColors.black,
+      body: Center(
+        child: ElevatedButton(
+            onPressed: () {
+              Future.wait([
+                GoogleSignIn().signOut(),
+                FirebaseAuth.instance.signOut(),
+              ]);
+            },
+            child: const Text("Log out")),
       ),
     );
   }

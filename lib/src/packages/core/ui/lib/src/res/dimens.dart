@@ -16,4 +16,5 @@ class ChateoDimens {
   static const double dimen_60 = 60;
   static const double dimen_72 = 72;
   static const double dimen_92 = 92;
+  static const double dimen_96 = 96;
 }

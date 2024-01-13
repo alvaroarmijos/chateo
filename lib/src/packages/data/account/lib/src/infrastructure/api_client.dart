@@ -28,7 +28,9 @@ class AccountApiClient {
     );
 
     // Once signed in, return the UserCredential
-    return await _instance.signInWithCredential(credential);
+    final credentials = await _instance.signInWithCredential(credential);
+
+    return credentials;
   }
 
   Future<void> signOut() => Future.wait([

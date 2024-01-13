@@ -1,3 +1,4 @@
+import 'package:chateo/src/app/bloc/app_bloc.dart';
 import 'package:chateo/src/packages/data/account/account.dart';
 import 'package:chateo/src/packages/features/login/login.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -7,6 +8,11 @@ import 'package:google_sign_in/google_sign_in.dart';
 final sl = GetIt.instance;
 
 Future<void> init() async {
+  /// App
+  ///
+  /// Bloc
+  sl.registerFactory(() => AppBloc(sl()));
+
   /// Account
   ///
   /// UseCases
