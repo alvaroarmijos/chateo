@@ -1,6 +1,7 @@
 import 'package:chateo/src/app/bloc/app_bloc.dart';
 import 'package:chateo/src/packages/data/account/account.dart';
 import 'package:chateo/src/packages/data/chat/chat.dart';
+import 'package:chateo/src/packages/data/chat/lib/src/application/update_user_status_use_case.dart';
 import 'package:chateo/src/packages/features/home/src/bloc/home_bloc.dart';
 import 'package:chateo/src/packages/features/login/login.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -39,6 +40,7 @@ Future<void> init() async {
   ///
   /// UseCases
   sl.registerLazySingleton(() => GetChatUsersUseCase(sl()));
+  sl.registerLazySingleton(() => UpdateUserStatusUseCase(sl()));
 
   /// Infrastructure
   sl.registerLazySingleton(() => const ChatUserMapper());
@@ -62,7 +64,7 @@ Future<void> init() async {
 
   /// Home
   /// //Bloc
-  sl.registerFactory(() => HomeBloc(sl(), sl()));
+  sl.registerFactory(() => HomeBloc(sl(), sl(), sl()));
 
   //External
   sl.registerLazySingleton(() => FirebaseAuth.instance);

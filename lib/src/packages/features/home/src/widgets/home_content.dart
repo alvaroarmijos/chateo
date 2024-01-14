@@ -34,11 +34,12 @@ class HomeContent extends StatelessWidget {
                   Align(
                     alignment: Alignment.centerLeft,
                     child: IconButton(
-                        onPressed: () {},
-                        icon: const Icon(
-                          Icons.search,
-                          color: Colors.white,
-                        )),
+                      onPressed: () {},
+                      icon: const Icon(
+                        Icons.search,
+                        color: Colors.white,
+                      ),
+                    ),
                   ),
                   Text(
                     'Home',

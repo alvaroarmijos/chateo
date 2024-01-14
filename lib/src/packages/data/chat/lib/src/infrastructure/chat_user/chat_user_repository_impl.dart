@@ -13,4 +13,12 @@ class ChatUserRepositoryImpl extends ChatUserRepository {
   Stream<List<ChatUser>> findAll() => _chatApiClient
       .getChats()
       .map((dtos) => _chatUserMapper.fromApiChatUserDtoList(dtos));
+
+  @override
+  Future<void> updateById(String uid, String name, bool status) =>
+      _chatApiClient.updateUserStatus(
+        uid,
+        name,
+        status,
+      );
 }

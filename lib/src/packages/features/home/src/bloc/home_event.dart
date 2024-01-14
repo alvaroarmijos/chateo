@@ -10,3 +10,15 @@ sealed class HomeEvent extends Equatable {
 final class GetChatUsersEvent extends HomeEvent {
   const GetChatUsersEvent();
 }
+
+final class UpdateUserStatusEvent extends HomeEvent {
+  const UpdateUserStatusEvent(
+    this.uid,
+    this.name,
+    this.status,
+  );
+
+  final String uid;
+  final String name;
+  final bool status;
+}

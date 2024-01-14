@@ -29,4 +29,11 @@ class ChatApiClient {
       throw ChatsException();
     }
   }
+
+  Future<void> updateUserStatus(String uid, String name, bool status) {
+    return _instance
+        .ref("status")
+        .child(uid)
+        .update({'name': name, 'status': status});
+  }
 }
