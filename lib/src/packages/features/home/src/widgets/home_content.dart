@@ -20,6 +20,7 @@ class HomeContent extends StatelessWidget {
     final textTheme = Theme.of(context).textTheme;
 
     return SafeArea(
+      bottom: false,
       child: Column(
         mainAxisSize: MainAxisSize.max,
         children: [

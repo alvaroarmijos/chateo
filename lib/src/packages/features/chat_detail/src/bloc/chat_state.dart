@@ -19,6 +19,9 @@ final class ChatSuccess extends ChatState {
 
   final List<Message> messages;
   final String myUid;
+
+  @override
+  List<Object> get props => [messages];
 }
 
 final class ChatError extends ChatState {

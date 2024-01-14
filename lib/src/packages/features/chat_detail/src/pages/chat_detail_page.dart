@@ -71,6 +71,8 @@ class _ChatDetailPageState extends State<ChatDetailPage> {
                         : ChatContent(
                             messages: messages,
                             myUid: myUid,
+                            name: widget.userChatName,
+                            photoUrl: widget.userChatPhotoUrl,
                           ),
                 };
               },

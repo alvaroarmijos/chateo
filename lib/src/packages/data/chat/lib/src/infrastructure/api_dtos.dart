@@ -1,3 +1,5 @@
+import 'package:chateo/src/packages/core/utils/lib/src/extensions/extensions.dart';
+
 class ChatUserDto {
   final String uid;
   final String name;
@@ -52,6 +54,8 @@ class MessageDto {
     );
   }
 
-  static List<MessageDto> fromJsonArray(List jsonArray) =>
-      jsonArray.map((e) => MessageDto.fromJson(e)).toList().reversed.toList();
+  static List<MessageDto> fromJsonArray(List jsonArray) => jsonArray
+      .map((e) => MessageDto.fromJson(e))
+      .sortedBy((messages) => messages.date)
+      .toList();
 }

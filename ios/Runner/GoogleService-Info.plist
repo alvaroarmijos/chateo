@@ -6,6 +6,8 @@
 	<string>1041851523256-fug0aph7a9a2jhfunvq9aonrhl8j972i.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
 	<string>com.googleusercontent.apps.1041851523256-fug0aph7a9a2jhfunvq9aonrhl8j972i</string>
+	<key>ANDROID_CLIENT_ID</key>
+	<string>1041851523256-83rjj5rtemq4g1674t8bms93qtm7cbpf.apps.googleusercontent.com</string>
 	<key>API_KEY</key>
 	<string>AIzaSyDf4IlVp-0rdV7foazrOOpSNvZ58lYNJZ4</string>
 	<key>GCM_SENDER_ID</key>
@@ -30,5 +32,7 @@
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
 	<string>1:1041851523256:ios:335fb4c88f6eb297bc544d</string>
+	<key>DATABASE_URL</key>
+	<string>https://chateo-83e48-default-rtdb.firebaseio.com</string>
 </dict>
 </plist>

@@ -10,9 +10,9 @@ class ChatUserRepositoryImpl extends ChatUserRepository {
   );
 
   @override
-  Stream<List<ChatUser>> findAll() => _chatApiClient
-      .getUserChats()
-      .map((dtos) => _chatUserMapper.fromApiChatUserDtoList(dtos));
+  Stream<List<ChatUser>> findAll() => _chatApiClient.getUserChats().map(
+        (dtos) => _chatUserMapper.fromApiChatUserDtoList(dtos),
+      );
 
   @override
   Future<void> updateById(

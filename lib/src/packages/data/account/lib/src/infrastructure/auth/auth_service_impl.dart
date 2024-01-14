@@ -19,9 +19,9 @@ class AuthServiceImpl implements AuthService {
   Future<void> logOut() => _apiClient.signOut();
 
   @override
-  Stream<User?> getUser() => _apiClient
-      .getUser()
-      .map((user) => user == null ? null : _userMapper.fromApiDto(user));
+  Stream<User?> getUser() => _apiClient.getUser().map(
+        (user) => user == null ? null : _userMapper.fromApiDto(user),
+      );
 
   @override
   Future<void> signUp(

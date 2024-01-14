@@ -6,11 +6,15 @@ class MessageWidget extends StatelessWidget {
   const MessageWidget({
     super.key,
     required this.msg,
+    required this.name,
+    required this.photoUrl,
     required this.date,
     required this.mySelf,
   });
 
   final String msg;
+  final String name;
+  final String? photoUrl;
   final DateTime date;
   final bool mySelf;
 
@@ -30,9 +34,12 @@ class MessageWidget extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         if (!mySelf)
-          const Padding(
-            padding: EdgeInsets.only(right: ChateoDimens.dimen_20),
-            child: ChateoAvatar(name: 'Alvaro'),
+          Padding(
+            padding: const EdgeInsets.only(right: ChateoDimens.dimen_20),
+            child: ChateoAvatar(
+              name: name,
+              photoUrl: photoUrl,
+            ),
           ),
         Column(
           mainAxisSize: MainAxisSize.min,
