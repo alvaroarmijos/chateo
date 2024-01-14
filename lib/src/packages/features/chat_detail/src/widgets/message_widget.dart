@@ -1,16 +1,17 @@
 import 'package:chateo/src/packages/core/ui/ui.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 class MessageWidget extends StatelessWidget {
   const MessageWidget({
     super.key,
     required this.msg,
-    required this.hour,
+    required this.date,
     required this.mySelf,
   });
 
   final String msg;
-  final String hour;
+  final DateTime date;
   final bool mySelf;
 
   @override
@@ -19,6 +20,8 @@ class MessageWidget extends StatelessWidget {
     final textColor = mySelf ? Colors.white : Colors.black;
     final maxWidth = MediaQuery.sizeOf(context).width * 0.6;
     final textTheme = Theme.of(context).textTheme;
+    final formattedDate =
+        DateFormat(ChateoStrings.chat_dateFormat).format(date);
 
     return Row(
       mainAxisSize: MainAxisSize.max,
@@ -72,9 +75,10 @@ class MessageWidget extends StatelessWidget {
               padding: EdgeInsets.only(
                 right: mySelf ? ChateoDimens.dimen_8 : 0,
                 left: mySelf ? 0 : ChateoDimens.dimen_8,
+                bottom: ChateoDimens.dimen_16,
               ),
               child: Text(
-                hour,
+                formattedDate,
                 style: textTheme.bodySmall?.copyWith(
                   color: ChateoColors.darkGrey,
                 ),

@@ -18,7 +18,7 @@ class ChatContent extends StatelessWidget {
       itemCount: messages.length,
       itemBuilder: (context, index) => MessageWidget(
         msg: messages[index].msg,
-        hour: messages[index].date,
+        date: messages[index].date,
         mySelf: messages[index].sentBy == myUid,
       ),
     );

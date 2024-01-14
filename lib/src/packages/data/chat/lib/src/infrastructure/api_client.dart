@@ -42,6 +42,18 @@ class ChatApiClient {
     }
   }
 
+  Future<void> sendMessage(
+    String chatUid,
+    String msg,
+    String uid,
+  ) {
+    return _instance.ref("chats").child("$chatUid/messages").push().set({
+      'message': msg,
+      'messageDate': DateTime.now().toIso8601String(),
+      'sentBy': uid,
+    });
+  }
+
   Future<void> updateUserStatus(
       String uid, String name, String? photoUrl, bool status) {
     return _instance.ref("status").child(uid).update({

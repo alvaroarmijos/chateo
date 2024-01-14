@@ -16,3 +16,15 @@ final class GetChatsEvent extends ChatEvent {
   final String chatUserUid;
   final String myUid;
 }
+
+final class SendMessageEvent extends ChatEvent {
+  const SendMessageEvent(
+    this.chatUserUid,
+    this.myUid,
+    this.msg,
+  );
+
+  final String chatUserUid;
+  final String myUid;
+  final String msg;
+}

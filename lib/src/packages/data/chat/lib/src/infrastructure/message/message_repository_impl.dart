@@ -16,4 +16,16 @@ class MessageRepositoryImpl extends MessageRepository {
   Stream<List<Message>> findAll(String chatId) => _chatApiClient
       .getChat(chatId)
       .map((dtos) => _messageMapper.fromApiChatUserDtoList(dtos));
+
+  @override
+  Future<void> sendMessage(
+    String chatUid,
+    String msg,
+    String uid,
+  ) =>
+      _chatApiClient.sendMessage(
+        chatUid,
+        msg,
+        uid,
+      );
 }

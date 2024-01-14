@@ -76,7 +76,13 @@ class _ChatDetailPageState extends State<ChatDetailPage> {
               },
             ),
             ChateoTextFormField(
-              onSend: (msg) => print(msg),
+              onSend: (msg) => context.read<ChatBloc>().add(
+                    SendMessageEvent(
+                      widget.userChatUid,
+                      widget.myUid,
+                      msg,
+                    ),
+                  ),
             ),
           ],
         ),

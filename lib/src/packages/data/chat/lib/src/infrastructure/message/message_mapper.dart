@@ -10,7 +10,7 @@ class MessageMapper {
 
     return Message(
       msg: msg,
-      date: date,
+      date: DateTime.parse(date),
       sentBy: sentBy,
     );
   }

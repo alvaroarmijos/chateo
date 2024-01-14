@@ -53,5 +53,5 @@ class MessageDto {
   }
 
   static List<MessageDto> fromJsonArray(List jsonArray) =>
-      jsonArray.map((e) => MessageDto.fromJson(e)).toList();
+      jsonArray.map((e) => MessageDto.fromJson(e)).toList().reversed.toList();
 }

@@ -2,7 +2,7 @@ import 'package:equatable/equatable.dart';
 
 class Message extends Equatable {
   final String msg;
-  final String date;
+  final DateTime date;
   final String sentBy;
 
   const Message({
