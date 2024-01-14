@@ -1,6 +1,9 @@
+import 'package:chateo/src/app/di/di.dart';
 import 'package:chateo/src/app/navigator/app_navigator.dart';
 import 'package:chateo/src/packages/features/home/home.dart';
+import 'package:chateo/src/packages/features/home/src/bloc/home_bloc.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 final navigatorKey = GlobalKey<NavigatorState>();
 
@@ -20,7 +23,10 @@ class ChateoFlow extends StatelessWidget {
       case AppNavigator.ROUTE_MAIN_PAGE:
         return MaterialPageRoute(
           settings: settings,
-          builder: (context) => const HomePage(),
+          builder: (context) => BlocProvider(
+            create: (context) => sl<HomeBloc>(),
+            child: const HomePage(),
+          ),
         );
       default:
         return MaterialPageRoute(
