@@ -62,7 +62,7 @@ Future<void> init() async {
 
   /// Home
   /// //Bloc
-  sl.registerFactory(() => HomeBloc(sl()));
+  sl.registerFactory(() => HomeBloc(sl(), sl()));
 
   //External
   sl.registerLazySingleton(() => FirebaseAuth.instance);

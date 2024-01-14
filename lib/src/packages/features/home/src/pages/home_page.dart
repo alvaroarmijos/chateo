@@ -1,5 +1,6 @@
 import 'package:chateo/src/packages/features/home/src/bloc/home_bloc.dart';
 import 'package:chateo/src/packages/features/home/src/widgets/home_content.dart';
+import 'package:chateo/src/packages/features/home/src/widgets/home_error.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -17,12 +18,13 @@ class HomePage extends StatelessWidget {
             HomeLoading() => const Center(
                 child: CircularProgressIndicator(),
               ),
-            HomeError() => const Center(
-                child: Text('Algo salió mal. Vuelve a intentar'),
-              ),
-            HomeSucces(chats: final chats) => HomeContent(
-                chats: chats,
-              ),
+            HomeError() => const HomeErrorWidget(),
+            HomeSucces(chats: final chats, user: final user) => (user == null)
+                ? const HomeErrorWidget()
+                : HomeContent(
+                    chats: chats,
+                    user: user,
+                  ),
           };
         },
       ),

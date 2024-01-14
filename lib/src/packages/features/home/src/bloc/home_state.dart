@@ -14,8 +14,10 @@ final class HomeLoading extends HomeState {
 final class HomeSucces extends HomeState {
   const HomeSucces(
     this.chats,
+    this.user,
   );
 
+  final User? user;
   final List<ChatUser> chats;
 
   @override
