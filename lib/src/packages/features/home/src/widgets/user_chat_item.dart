@@ -1,4 +1,5 @@
 import 'package:avatars/avatars.dart';
+import 'package:chateo/src/app/navigator/app_navigator.dart';
 import 'package:chateo/src/packages/core/ui/ui.dart';
 import 'package:chateo/src/packages/data/chat/lib/src/domain/chat_user/chat_user.dart';
 import 'package:flutter/material.dart';
@@ -14,6 +15,12 @@ class UserChatItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListTile(
+      onTap: () => AppNavigator.navigateToChat(
+        context,
+        chatUser.uid,
+        chatUser.name,
+        chatUser.status,
+      ),
       leading: Avatar(
         name: chatUser.name,
         shape: AvatarShape.circle(ChateoDimens.dimen_20),

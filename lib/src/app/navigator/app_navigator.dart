@@ -8,6 +8,11 @@ class AppNavigator {
   static const ROUTE_MAIN_PAGE = Navigator.defaultRouteName;
   static const ROUTE_LOG_IN = '/log-in';
   static const ROUTE_SIGN_UP = '/sign-up';
+  static const ROUTE_CHAT = '/chat';
+
+  static const ARGS_USER_CHAT_ID = 'userChatId';
+  static const ARGS_USER_CHAT_NAME = 'userChatName';
+  static const ARGS_USER_CHAT_STATUS = 'userChatStatus';
 
   static void navigateBack(BuildContext context) => Navigator.pop(context);
 
@@ -29,5 +34,22 @@ class AppNavigator {
 
   static void navigateToSignUp(BuildContext context) {
     Navigator.pushNamed(context, ROUTE_SIGN_UP);
+  }
+
+  static void navigateToChat(
+    BuildContext context,
+    String userChatUid,
+    String userChatName,
+    bool userChatStatus,
+  ) {
+    Navigator.pushNamed(
+      context,
+      ROUTE_CHAT,
+      arguments: <String, dynamic>{
+        ARGS_USER_CHAT_ID: userChatUid,
+        ARGS_USER_CHAT_NAME: userChatName,
+        ARGS_USER_CHAT_STATUS: userChatStatus,
+      },
+    );
   }
 }

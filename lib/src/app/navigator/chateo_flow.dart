@@ -1,7 +1,7 @@
 import 'package:chateo/src/app/di/di.dart';
 import 'package:chateo/src/app/navigator/app_navigator.dart';
+import 'package:chateo/src/packages/features/chat_detail/chat_detail.dart';
 import 'package:chateo/src/packages/features/home/home.dart';
-import 'package:chateo/src/packages/features/home/src/bloc/home_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -19,6 +19,8 @@ class ChateoFlow extends StatelessWidget {
   }
 
   static Route<dynamic> _routeFactory(RouteSettings settings) {
+    final args = settings.arguments as Map<String, dynamic>?;
+
     switch (settings.name) {
       case AppNavigator.ROUTE_MAIN_PAGE:
         return MaterialPageRoute(
@@ -26,6 +28,15 @@ class ChateoFlow extends StatelessWidget {
           builder: (context) => BlocProvider(
             create: (context) => sl<HomeBloc>(),
             child: const HomePage(),
+          ),
+        );
+      case AppNavigator.ROUTE_CHAT:
+        return MaterialPageRoute(
+          settings: settings,
+          builder: (context) => ChatDetailPage(
+            userChatUid: args![AppNavigator.ARGS_USER_CHAT_ID],
+            userChatName: args[AppNavigator.ARGS_USER_CHAT_NAME],
+            userChatStatus: args[AppNavigator.ARGS_USER_CHAT_STATUS],
           ),
         );
       default:
