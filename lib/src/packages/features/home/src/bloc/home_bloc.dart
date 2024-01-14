@@ -46,9 +46,9 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
             ),
           );
         }
-        // data.$2.removeWhere(
-        //   (element) => element.uid == user?.uid,
-        // );
+        data.$2.removeWhere(
+          (element) => element.uid == user?.uid,
+        );
         return HomeSucces(data.$2, user);
       },
       onError: (error, stackTrace) => const HomeError(),
