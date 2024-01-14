@@ -15,10 +15,16 @@ class ChatUserRepositoryImpl extends ChatUserRepository {
       .map((dtos) => _chatUserMapper.fromApiChatUserDtoList(dtos));
 
   @override
-  Future<void> updateById(String uid, String name, bool status) =>
+  Future<void> updateById(
+    String uid,
+    String name,
+    String? photoUrl,
+    bool status,
+  ) =>
       _chatApiClient.updateUserStatus(
         uid,
         name,
+        photoUrl,
         status,
       );
 }

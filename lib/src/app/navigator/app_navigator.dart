@@ -13,6 +13,7 @@ class AppNavigator {
   static const ARGS_USER_CHAT_ID = 'userChatId';
   static const ARGS_USER_CHAT_NAME = 'userChatName';
   static const ARGS_USER_CHAT_STATUS = 'userChatStatus';
+  static const ARGS_USER_PHOTO_URL = 'userChatPhotoUrl';
 
   static void navigateBack(BuildContext context) => Navigator.pop(context);
 
@@ -40,6 +41,7 @@ class AppNavigator {
     BuildContext context,
     String userChatUid,
     String userChatName,
+    String? userPhotoUrl,
     bool userChatStatus,
   ) {
     Navigator.pushNamed(
@@ -49,6 +51,7 @@ class AppNavigator {
         ARGS_USER_CHAT_ID: userChatUid,
         ARGS_USER_CHAT_NAME: userChatName,
         ARGS_USER_CHAT_STATUS: userChatStatus,
+        ARGS_USER_PHOTO_URL: userPhotoUrl,
       },
     );
   }

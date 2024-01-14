@@ -1,4 +1,3 @@
-import 'package:avatars/avatars.dart';
 import 'package:chateo/src/app/navigator/app_navigator.dart';
 import 'package:chateo/src/packages/core/ui/ui.dart';
 import 'package:chateo/src/packages/data/chat/lib/src/domain/chat_user/chat_user.dart';
@@ -19,11 +18,12 @@ class UserChatItem extends StatelessWidget {
         context,
         chatUser.uid,
         chatUser.name,
+        chatUser.photoUrl,
         chatUser.status,
       ),
-      leading: Avatar(
+      leading: ChateoAvatar(
         name: chatUser.name,
-        shape: AvatarShape.circle(ChateoDimens.dimen_20),
+        photoUrl: chatUser.photoUrl,
       ),
       title: Text(
         chatUser.name,
@@ -32,10 +32,11 @@ class UserChatItem extends StatelessWidget {
         width: ChateoDimens.dimen_12,
         height: ChateoDimens.dimen_12,
         child: DecoratedBox(
-            decoration: BoxDecoration(
-          shape: BoxShape.circle,
-          color: chatUser.status ? Colors.green : Colors.red,
-        )),
+          decoration: BoxDecoration(
+            shape: BoxShape.circle,
+            color: chatUser.status ? Colors.green : Colors.red,
+          ),
+        ),
       ),
     );
   }

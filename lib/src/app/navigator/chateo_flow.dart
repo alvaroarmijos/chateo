@@ -37,6 +37,7 @@ class ChateoFlow extends StatelessWidget {
             userChatUid: args![AppNavigator.ARGS_USER_CHAT_ID],
             userChatName: args[AppNavigator.ARGS_USER_CHAT_NAME],
             userChatStatus: args[AppNavigator.ARGS_USER_CHAT_STATUS],
+            userChatPhotoUrl: args[AppNavigator.ARGS_USER_PHOTO_URL],
           ),
         );
       default:

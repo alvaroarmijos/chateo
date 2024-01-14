@@ -37,11 +37,18 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
       onData: (data) {
         final user = data.$1;
         if (user?.uid != null && user?.name != null) {
-          add(UpdateUserStatusEvent(user!.uid, user.name!, false));
+          add(
+            UpdateUserStatusEvent(
+              user!.uid,
+              user.name!,
+              user.photoUrl,
+              true,
+            ),
+          );
         }
-        data.$2.removeWhere(
-          (element) => element.uid == user?.uid,
-        );
+        // data.$2.removeWhere(
+        //   (element) => element.uid == user?.uid,
+        // );
         return HomeSucces(data.$2, user);
       },
       onError: (error, stackTrace) => const HomeError(),
@@ -53,7 +60,12 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     Emitter<HomeState> emit,
   ) {
     return emit.onEach(
-      _updateUserStatusUseCase(event.uid, event.name, event.status).asStream(),
+      _updateUserStatusUseCase(
+        event.uid,
+        event.name,
+        event.photoUrl,
+        event.status,
+      ).asStream(),
       onData: (_) {},
     );
   }

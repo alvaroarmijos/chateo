@@ -1,4 +1,3 @@
-import 'package:avatars/avatars.dart';
 import 'package:chateo/src/packages/core/ui/ui.dart';
 import 'package:chateo/src/packages/data/account/account.dart';
 import 'package:chateo/src/packages/features/home/src/widgets/user_chats_list.dart';
@@ -49,16 +48,10 @@ class HomeContent extends StatelessWidget {
                   ),
                   Align(
                     alignment: Alignment.centerRight,
-                    child: (user.photoUrl == null)
-                        ? Avatar(
-                            name: user.name,
-                            shape: AvatarShape.circle(ChateoDimens.dimen_20),
-                          )
-                        : CircleAvatar(
-                            backgroundImage: NetworkImage(
-                              user.photoUrl!,
-                            ),
-                          ),
+                    child: ChateoAvatar(
+                      name: user.name ?? '',
+                      photoUrl: user.photoUrl,
+                    ),
                   )
                 ],
               ),

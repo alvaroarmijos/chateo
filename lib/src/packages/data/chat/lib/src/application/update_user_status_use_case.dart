@@ -8,11 +8,13 @@ class UpdateUserStatusUseCase {
   Future<void> call(
     String uid,
     String name,
+    String? photoUrl,
     bool status,
   ) =>
       _chatUserRepository.updateById(
         uid,
         name,
+        photoUrl,
         status,
       );
 }
