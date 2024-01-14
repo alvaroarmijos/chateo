@@ -33,11 +33,15 @@ class ChateoFlow extends StatelessWidget {
       case AppNavigator.ROUTE_CHAT:
         return MaterialPageRoute(
           settings: settings,
-          builder: (context) => ChatDetailPage(
-            userChatUid: args![AppNavigator.ARGS_USER_CHAT_ID],
-            userChatName: args[AppNavigator.ARGS_USER_CHAT_NAME],
-            userChatStatus: args[AppNavigator.ARGS_USER_CHAT_STATUS],
-            userChatPhotoUrl: args[AppNavigator.ARGS_USER_PHOTO_URL],
+          builder: (context) => BlocProvider(
+            create: (context) => sl<ChatBloc>(),
+            child: ChatDetailPage(
+              userChatUid: args![AppNavigator.ARGS_USER_CHAT_ID],
+              userChatName: args[AppNavigator.ARGS_USER_CHAT_NAME],
+              userChatStatus: args[AppNavigator.ARGS_USER_CHAT_STATUS],
+              userChatPhotoUrl: args[AppNavigator.ARGS_USER_PHOTO_URL],
+              myUid: args[AppNavigator.ARGS_MY_UID],
+            ),
           ),
         );
       default:

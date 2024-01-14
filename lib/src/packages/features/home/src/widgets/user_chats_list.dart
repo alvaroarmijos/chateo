@@ -8,9 +8,11 @@ class UserChatsList extends StatelessWidget {
   const UserChatsList({
     super.key,
     required this.chats,
+    required this.myUid,
   });
 
   final List<ChatUser> chats;
+  final String myUid;
 
   @override
   Widget build(BuildContext context) {
@@ -32,6 +34,7 @@ class UserChatsList extends StatelessWidget {
         itemCount: chats.length,
         itemBuilder: (context, index) => UserChatItem(
           chatUser: chats[index],
+          myUid: myUid,
         ),
       ),
     );

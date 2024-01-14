@@ -57,7 +57,10 @@ class HomeContent extends StatelessWidget {
               ),
             ),
           ),
-          UserChatsList(chats: chats),
+          UserChatsList(
+            chats: chats,
+            myUid: user.uid,
+          ),
         ],
       ),
     );

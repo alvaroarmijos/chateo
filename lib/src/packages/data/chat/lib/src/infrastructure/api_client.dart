@@ -7,7 +7,7 @@ class ChatApiClient {
 
   ChatApiClient(this._instance);
 
-  Stream<List<ChatUserDto>> getChats() {
+  Stream<List<ChatUserDto>> getUserChats() {
     try {
       return _instance
           .ref("status")
@@ -24,6 +24,18 @@ class ChatApiClient {
           )
           .map(
             (event) => ChatUserDto.fromJsonArray(event.values.toList()),
+          );
+    } catch (e) {
+      throw ChatsException();
+    }
+  }
+
+  Stream<List<MessageDto>> getChat(String chatId) {
+    try {
+      return _instance.ref("chats").child("$chatId/messages").onValue.map(
+            (event) => MessageDto.fromJsonArray(event.snapshot.value != null
+                ? (event.snapshot.value as Map).values.toList()
+                : []),
           );
     } catch (e) {
       throw ChatsException();

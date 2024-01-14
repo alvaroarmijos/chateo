@@ -7,9 +7,11 @@ class UserChatItem extends StatelessWidget {
   const UserChatItem({
     super.key,
     required this.chatUser,
+    required this.myUid,
   });
 
   final ChatUser chatUser;
+  final String myUid;
 
   @override
   Widget build(BuildContext context) {
@@ -17,6 +19,7 @@ class UserChatItem extends StatelessWidget {
       onTap: () => AppNavigator.navigateToChat(
         context,
         chatUser.uid,
+        myUid,
         chatUser.name,
         chatUser.photoUrl,
         chatUser.status,

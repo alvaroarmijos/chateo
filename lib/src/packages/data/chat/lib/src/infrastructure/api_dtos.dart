@@ -28,3 +28,30 @@ class ChatUserDto {
   static List<ChatUserDto> fromJsonArray(List jsonArray) =>
       jsonArray.map((e) => ChatUserDto.fromJson(e)).toList();
 }
+
+class MessageDto {
+  final String msg;
+  final String date;
+  final String sentBy;
+
+  const MessageDto(
+    this.msg,
+    this.date,
+    this.sentBy,
+  );
+
+  factory MessageDto.fromJson(Map jsonObj) {
+    final String message = jsonObj['message'];
+    final String date = jsonObj['messageDate'];
+    final String sentBy = jsonObj['sentBy'];
+
+    return MessageDto(
+      message,
+      date,
+      sentBy,
+    );
+  }
+
+  static List<MessageDto> fromJsonArray(List jsonArray) =>
+      jsonArray.map((e) => MessageDto.fromJson(e)).toList();
+}
