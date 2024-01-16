@@ -1,3 +1,4 @@
+import 'package:chateo/src/app/navigator/app_navigator.dart';
 import 'package:chateo/src/packages/core/ui/ui.dart';
 import 'package:chateo/src/packages/data/account/account.dart';
 import 'package:chateo/src/packages/features/home/src/widgets/user_chats_list.dart';
@@ -49,9 +50,15 @@ class HomeContent extends StatelessWidget {
                   ),
                   Align(
                     alignment: Alignment.centerRight,
-                    child: ChateoAvatar(
-                      name: user.name ?? '',
-                      photoUrl: user.photoUrl,
+                    child: GestureDetector(
+                      onTap: () => AppNavigator.navigateToProfile(context),
+                      child: Hero(
+                        tag: user.uid,
+                        child: ChateoAvatar(
+                          name: user.name ?? '',
+                          photoUrl: user.photoUrl,
+                        ),
+                      ),
                     ),
                   )
                 ],

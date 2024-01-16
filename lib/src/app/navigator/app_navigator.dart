@@ -9,6 +9,7 @@ class AppNavigator {
   static const ROUTE_LOG_IN = '/log-in';
   static const ROUTE_SIGN_UP = '/sign-up';
   static const ROUTE_CHAT = '/chat';
+  static const ROUTE_PROFILE = '/profile';
 
   static const ARGS_USER_CHAT_ID = 'userChatId';
   static const ARGS_USER_CHAT_NAME = 'userChatName';
@@ -57,5 +58,9 @@ class AppNavigator {
         ARGS_MY_UID: myUid,
       },
     );
+  }
+
+  static void navigateToProfile(BuildContext context) {
+    Navigator.pushNamed(context, ROUTE_PROFILE);
   }
 }

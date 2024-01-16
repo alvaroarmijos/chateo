@@ -2,6 +2,7 @@ import 'package:chateo/src/app/di/di.dart';
 import 'package:chateo/src/app/navigator/app_navigator.dart';
 import 'package:chateo/src/packages/features/chat_detail/chat_detail.dart';
 import 'package:chateo/src/packages/features/home/home.dart';
+import 'package:chateo/src/packages/features/profile/profile.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -42,6 +43,14 @@ class ChateoFlow extends StatelessWidget {
               userChatPhotoUrl: args[AppNavigator.ARGS_USER_PHOTO_URL],
               myUid: args[AppNavigator.ARGS_MY_UID],
             ),
+          ),
+        );
+      case AppNavigator.ROUTE_PROFILE:
+        return MaterialPageRoute(
+          settings: settings,
+          builder: (context) => BlocProvider(
+            create: (context) => sl<ProfileBloc>(),
+            child: const ProfilePage(),
           ),
         );
       default:

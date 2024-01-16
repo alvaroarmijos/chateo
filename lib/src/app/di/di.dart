@@ -6,6 +6,7 @@ import 'package:chateo/src/packages/data/chat/lib/src/application/update_user_st
 import 'package:chateo/src/packages/features/chat_detail/chat_detail.dart';
 import 'package:chateo/src/packages/features/home/src/bloc/home_bloc.dart';
 import 'package:chateo/src/packages/features/login/login.dart';
+import 'package:chateo/src/packages/features/profile/profile.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:get_it/get_it.dart';
@@ -81,6 +82,10 @@ Future<void> init() async {
   /// Chat
   /// //Bloc
   sl.registerFactory(() => ChatBloc(sl(), sl()));
+
+  /// Profile
+  /// //Bloc
+  sl.registerFactory(() => ProfileBloc(sl(), sl(), sl()));
 
   //External
   sl.registerLazySingleton(() => FirebaseAuth.instance);

@@ -10,12 +10,14 @@ class UserMapper {
     final name = dto.displayName;
     final email = dto.email;
     final photoURL = dto.photoURL;
+    final phoneNumber = dto.phoneNumber;
 
     return domain.User(
       uid: uid,
       name: name,
       email: email,
       photoUrl: photoURL,
+      phoneNumber: phoneNumber,
     );
   }
 }

@@ -14,7 +14,9 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   @override
   void initState() {
-    context.read<HomeBloc>().add(const GetChatUsersEvent());
+    context.read<HomeBloc>()
+      ..add(const GetChatUsersEvent())
+      ..add(const UpdateUserStatusEvent());
     super.initState();
   }
 

@@ -27,8 +27,8 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
     emit(state.copyWith(status: Status.loading, error: Object()));
     return emit.forEach<void>(
       _logInWithEmailAndPasswordUseCase(
-        state.email!,
-        state.password!,
+        state.email!.trim(),
+        state.password!.trim(),
       ).asStream(),
       onData: (value) => state.copyWith(status: Status.success),
       onError: (error, __) =>
