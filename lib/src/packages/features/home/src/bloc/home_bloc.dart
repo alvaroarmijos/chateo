@@ -56,7 +56,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
                 user.uid,
                 user.name ?? '',
                 user.photoUrl,
-                true,
+                event.status,
               ).asStream()
             : const Stream.empty(),
       ),

@@ -12,5 +12,10 @@ final class GetChatUsersEvent extends HomeEvent {
 }
 
 final class UpdateUserStatusEvent extends HomeEvent {
-  const UpdateUserStatusEvent();
+  const UpdateUserStatusEvent(this.status);
+
+  final bool status;
+
+  @override
+  List<Object> get props => [status];
 }
