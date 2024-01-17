@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 
 import './src/app/di/di.dart' as di;
 import 'firebase_options.dart';
+import 'src/app/notification/notification_setup.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -13,6 +14,8 @@ void main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
+
+  await di.sl<NotificationSetup>().setupFlutterNotifications();
 
   runApp(const ChateoApp());
 }

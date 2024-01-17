@@ -57,11 +57,17 @@ class ChatApiClient {
   }
 
   Future<void> updateUserStatus(
-      String uid, String name, String? photoUrl, bool status) {
+    String uid,
+    String name,
+    String? photoUrl,
+    bool status,
+    String? token,
+  ) {
     return _instance.ref("status").child(uid).update({
       'name': name,
       'status': status,
       'photoUrl': photoUrl,
+      'token': token,
     });
   }
 }

@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:chateo/src/packages/data/account/account.dart';
 import 'package:chateo/src/packages/data/chat/chat.dart';
 import 'package:chateo/src/packages/data/chat/lib/src/application/update_user_status_use_case.dart';
+import 'package:chateo/src/packages/data/device/device.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:rxdart/rxdart.dart';
@@ -15,6 +16,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     this._getChatUsersUseCase,
     this._getUserUseCase,
     this._updateUserStatusUseCase,
+    this._getFcmTokenUseCase,
   ) : super(const HomeLoading()) {
     on<GetChatUsersEvent>(_onGetChatUsersEvent);
     on<UpdateUserStatusEvent>(_onUpdateUserStatusEvent);
@@ -23,6 +25,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
   final GetChatUsersUseCase _getChatUsersUseCase;
   final GetUserUseCase _getUserUseCase;
   final UpdateUserStatusUseCase _updateUserStatusUseCase;
+  final GetFcmTokenUseCase _getFcmTokenUseCase;
 
   FutureOr<void> _onGetChatUsersEvent(
     GetChatUsersEvent event,
@@ -50,13 +53,15 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     Emitter<HomeState> emit,
   ) {
     return emit.onEach(
-      _getUserUseCase().switchMap(
-        (user) => user != null
+      Rx.combineLatest2(_getUserUseCase(), _getFcmTokenUseCase().asStream(),
+          (user, token) => (user, token)).switchMap(
+        (data) => data.$1 != null
             ? _updateUserStatusUseCase(
-                user.uid,
-                user.name ?? '',
-                user.photoUrl,
+                data.$1!.uid,
+                data.$1!.name ?? '',
+                data.$1!.photoUrl,
                 event.status,
+                data.$2,
               ).asStream()
             : const Stream.empty(),
       ),

@@ -10,11 +10,13 @@ class UpdateUserStatusUseCase {
     String name,
     String? photoUrl,
     bool status,
+    String? token,
   ) =>
       _chatUserRepository.updateById(
         uid,
         name,
         photoUrl,
         status,
+        token,
       );
 }

@@ -44,6 +44,7 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
         event.user.name ?? '',
         event.user.photoUrl,
         false,
+        null,
       )
           .then(
             (_) => _logOutUseCase(),

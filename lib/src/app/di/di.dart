@@ -3,14 +3,18 @@ import 'package:chateo/src/packages/data/account/account.dart';
 import 'package:chateo/src/packages/data/chat/chat.dart';
 import 'package:chateo/src/packages/data/chat/lib/src/application/send_message_use_case.dart';
 import 'package:chateo/src/packages/data/chat/lib/src/application/update_user_status_use_case.dart';
+import 'package:chateo/src/packages/data/device/device.dart';
 import 'package:chateo/src/packages/features/chat_detail/chat_detail.dart';
 import 'package:chateo/src/packages/features/home/src/bloc/home_bloc.dart';
 import 'package:chateo/src/packages/features/login/login.dart';
 import 'package:chateo/src/packages/features/profile/profile.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:get_it/get_it.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+
+import '../notification/notification_setup.dart';
 
 final sl = GetIt.instance;
 
@@ -61,6 +65,11 @@ Future<void> init() async {
 
   sl.registerLazySingleton(() => ChatApiClient(sl()));
 
+  /// Device
+  ///
+  /// UseCases
+  sl.registerLazySingleton(() => GetFcmTokenUseCase(sl()));
+
   /// Features
 
   /// Login
@@ -77,7 +86,7 @@ Future<void> init() async {
 
   /// Home
   /// //Bloc
-  sl.registerFactory(() => HomeBloc(sl(), sl(), sl()));
+  sl.registerFactory(() => HomeBloc(sl(), sl(), sl(), sl()));
 
   /// Chat
   /// //Bloc
@@ -87,8 +96,12 @@ Future<void> init() async {
   /// //Bloc
   sl.registerFactory(() => ProfileBloc(sl(), sl(), sl()));
 
+  ///Notifications
+  sl.registerLazySingleton(() => NotificationSetup(sl()));
+
   //External
   sl.registerLazySingleton(() => FirebaseAuth.instance);
   sl.registerLazySingleton(() => FirebaseDatabase.instance);
   sl.registerLazySingleton(() => GoogleSignIn());
+  sl.registerLazySingleton(() => FirebaseMessaging.instance);
 }
