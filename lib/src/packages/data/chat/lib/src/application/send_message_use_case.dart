@@ -8,11 +8,13 @@ class SendMessageUseCase {
   Future<void> call(
     String chatUid,
     String msg,
-    String uid,
+    String sentBy,
+    String sentTo,
   ) =>
       _messageRepository.sendMessage(
         chatUid,
         msg,
-        uid,
+        sentBy,
+        sentTo,
       );
 }

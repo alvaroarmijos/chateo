@@ -38,8 +38,11 @@ class ChatBloc extends Bloc<ChatEvent, ChatState> {
   ) {
     return emit.onEach(
       _sendMessageUseCase(
-              getChatId(event.myUid, event.chatUserUid), event.msg, event.myUid)
-          .asStream(),
+        getChatId(event.myUid, event.chatUserUid),
+        event.msg,
+        event.myUid,
+        event.chatUserUid,
+      ).asStream(),
       onData: (data) {},
     );
   }
