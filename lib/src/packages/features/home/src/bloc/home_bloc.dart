@@ -53,9 +53,12 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     Emitter<HomeState> emit,
   ) {
     return emit.onEach(
-      Rx.combineLatest2(_getUserUseCase(), _getFcmTokenUseCase().asStream(),
-          (user, token) => (user, token)).switchMap(
-        (data) => data.$1 != null
+      Rx.combineLatest2(
+        _getUserUseCase(),
+        _getFcmTokenUseCase().asStream(),
+        (user, token) => (user, token),
+      ).switchMap(
+        (data) => (data.$1 != null)
             ? _updateUserStatusUseCase(
                 data.$1!.uid,
                 data.$1!.name ?? '',
