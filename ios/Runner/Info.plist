@@ -51,6 +51,12 @@
 		<true/>
 	</dict>
 
+	<key>UIBackgroundModes</key>
+	<array>
+		<string>processing</string>
+		<string>remote-notification</string>
+	</array>
+
 	<!-- Google Sign-in Section -->
 	<key>CFBundleURLTypes</key>
 	<array>

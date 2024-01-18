@@ -47,21 +47,29 @@ class ChatApiClient {
   Future<void> sendMessage(
     String chatUid,
     String msg,
-    String uid,
+    String sentBy,
+    String sentTo,
   ) {
     return _instance.ref("chats").child("$chatUid/messages").push().set({
       'message': msg,
       'messageDate': DateTime.now().toIso8601String(),
-      'sentBy': uid,
+      'sentBy': sentBy,
+      'sentTo': sentTo,
     });
   }
 
   Future<void> updateUserStatus(
-      String uid, String name, String? photoUrl, bool status) {
+    String uid,
+    String name,
+    String? photoUrl,
+    bool status,
+    String? token,
+  ) {
     return _instance.ref("status").child(uid).update({
       'name': name,
       'status': status,
       'photoUrl': photoUrl,
+      'token': token,
     });
   }
 }

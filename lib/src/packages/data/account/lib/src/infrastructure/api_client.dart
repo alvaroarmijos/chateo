@@ -28,9 +28,7 @@ class AccountApiClient {
     );
 
     // Once signed in, return the UserCredential
-    final credentials = await _instance.signInWithCredential(credential);
-
-    return credentials;
+    return await _instance.signInWithCredential(credential);
   }
 
   Future<void> signOut() => Future.wait([
@@ -42,15 +40,20 @@ class AccountApiClient {
     String email,
     String password,
     String name,
-  ) async {
+  ) {
     try {
       // Once signed in, return the UserCredential
-      final userCredential = await _instance.createUserWithEmailAndPassword(
-          email: email, password: password);
-
-      await userCredential.user?.updateDisplayName(name);
-
-      return userCredential;
+      return _instance
+          .createUserWithEmailAndPassword(
+        email: email,
+        password: password,
+      )
+          .then(
+        (userCredential) async {
+          await userCredential.user?.updateDisplayName(name);
+          return userCredential;
+        },
+      );
     } on FirebaseAuthException catch (e) {
       throw SignUpWithEmailAndPasswordException.fromCode(e.code);
     } catch (_) {

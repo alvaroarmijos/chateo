@@ -20,11 +20,13 @@ class ChatUserRepositoryImpl extends ChatUserRepository {
     String name,
     String? photoUrl,
     bool status,
+    String? token,
   ) =>
       _chatApiClient.updateUserStatus(
         uid,
         name,
         photoUrl,
         status,
+        token,
       );
 }

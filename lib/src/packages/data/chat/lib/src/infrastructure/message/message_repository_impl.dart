@@ -21,11 +21,13 @@ class MessageRepositoryImpl extends MessageRepository {
   Future<void> sendMessage(
     String chatUid,
     String msg,
-    String uid,
+    String sentBy,
+    String sentTo,
   ) =>
       _chatApiClient.sendMessage(
         chatUid,
         msg,
-        uid,
+        sentBy,
+        sentTo,
       );
 }

@@ -8,5 +8,6 @@ abstract class ChatUserRepository {
     String name,
     String? photoUrl,
     bool status,
+    String? token,
   );
 }

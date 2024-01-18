@@ -23,9 +23,13 @@ class _HomePageState extends State<HomePage> {
   @override
   void initState() {
     super.initState();
-    _bloc = context.read<HomeBloc>()
-      ..add(const GetChatUsersEvent())
-      ..add(const UpdateUserStatusEvent(true));
+    _bloc = context.read<HomeBloc>();
+
+    Future.delayed(const Duration(seconds: 1), () {
+      _bloc
+        ..add(const GetChatUsersEvent())
+        ..add(const UpdateUserStatusEvent(true));
+    });
 
     _state = SchedulerBinding.instance.lifecycleState;
     _listener = AppLifecycleListener(
