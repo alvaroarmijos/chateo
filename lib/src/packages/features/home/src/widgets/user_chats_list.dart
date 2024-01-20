@@ -17,6 +17,7 @@ class UserChatsList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final height = MediaQuery.sizeOf(context).height * 0.8;
+    final textTheme = Theme.of(context).textTheme;
 
     return Container(
       padding: const EdgeInsets.symmetric(
@@ -30,12 +31,30 @@ class UserChatsList extends StatelessWidget {
             topLeft: Radius.circular(ChateoDimens.dimen_40),
             topRight: Radius.circular(ChateoDimens.dimen_40),
           )),
-      child: ListView.builder(
-        itemCount: chats.length,
-        itemBuilder: (context, index) => UserChatItem(
-          chatUser: chats[index],
-          myUid: myUid,
-        ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Padding(
+            padding: const EdgeInsets.only(
+              left: ChateoDimens.dimen_12,
+              bottom: ChateoDimens.dimen_20,
+            ),
+            child: Text(
+              'My Contact',
+              style: textTheme.labelLarge,
+              textAlign: TextAlign.left,
+            ),
+          ),
+          Flexible(
+            child: ListView.builder(
+              itemCount: chats.length,
+              itemBuilder: (context, index) => UserChatItem(
+                chatUser: chats[index],
+                myUid: myUid,
+              ),
+            ),
+          ),
+        ],
       ),
     );
   }

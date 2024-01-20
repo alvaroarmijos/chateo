@@ -31,6 +31,12 @@ class UserChatItem extends StatelessWidget {
       title: Text(
         chatUser.name,
       ),
+      subtitle: Text(
+        chatUser.status ? 'Online' : 'Offline',
+        style: TextStyle(
+          color: ChateoColors.darkGrey,
+        ),
+      ),
       trailing: SizedBox(
         width: ChateoDimens.dimen_12,
         height: ChateoDimens.dimen_12,
