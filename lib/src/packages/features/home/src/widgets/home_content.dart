@@ -23,7 +23,6 @@ class HomeContent extends StatelessWidget {
     return SafeArea(
       bottom: false,
       child: Column(
-        mainAxisSize: MainAxisSize.max,
         children: [
           Expanded(
             child: Padding(
