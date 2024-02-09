@@ -1,3 +1,4 @@
+import 'package:chateo/src/packages/core/ui/lib/src/res/theme.dart';
 import 'package:chateo/src/packages/features/login/login.dart';
 import 'package:flutter/material.dart';
 
@@ -10,9 +11,10 @@ class MainApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
+    return MaterialApp(
+      theme: ChateoTheme.light,
       debugShowCheckedModeBanner: false,
-      home: OnboardingPage(),
+      home: const OnboardingPage(),
     );
   }
 }
