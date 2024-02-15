@@ -1,9 +1,11 @@
+import 'package:chateo/src/app/navigator/app_navigator.dart';
 import 'package:chateo/src/packages/core/ui/ui.dart';
-import 'package:chateo/src/packages/features/login/pages/login_page.dart';
+import 'package:chateo/src/packages/features/login/login.dart';
 import 'package:chateo/src/packages/features/login/widgets/onboarding_button.dart';
 import 'package:chateo/src/packages/features/login/widgets/onboarding_divider.dart';
 import 'package:chateo/src/packages/features/login/widgets/social_media_button.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class OnboardingPage extends StatelessWidget {
   const OnboardingPage({super.key});
@@ -16,11 +18,10 @@ class OnboardingPage extends StatelessWidget {
       backgroundColor: Colors.black,
       body: Stack(
         children: [
-          SizedBox(
-            width: double.infinity,
+          Align(
+            alignment: Alignment.topRight,
             child: Image.asset(
               ChateDrawables.getOnbordingBackgroundDrawable(),
-              fit: BoxFit.cover,
             ),
           ),
           SafeArea(
@@ -29,9 +30,6 @@ class OnboardingPage extends StatelessWidget {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  const SizedBox(
-                    height: ChateoDimens.dimen_12,
-                  ),
                   Image.asset(
                     ChateDrawables.getAppIconDrawable(),
                   ),
@@ -55,7 +53,7 @@ class OnboardingPage extends StatelessWidget {
                         ),
                       ),
                       const SizedBox(
-                        height: ChateoDimens.dimen_16,
+                        height: ChateoDimens.dimen_20,
                       ),
                       Text(
                         'Our chat app is the perfect way to stay connected with friends and family.',
@@ -65,37 +63,44 @@ class OnboardingPage extends StatelessWidget {
                       ),
                     ],
                   ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      SocialMediaButton(
-                        iconPath: ChateDrawables.getFacebookIconDrawable(),
-                        borderColor: ChateoColors.grey,
-                      ),
-                      const SizedBox(
-                        width: ChateoDimens.dimen_16,
-                      ),
-                      SocialMediaButton(
-                        iconPath: ChateDrawables.getGoogleIconDrawable(),
-                        borderColor: ChateoColors.grey,
-                      ),
-                      const SizedBox(
-                        width: ChateoDimens.dimen_16,
-                      ),
-                      SocialMediaButton(
-                        iconPath: ChateDrawables.getAppleIconDrawable(),
-                        color: Colors.white,
-                        borderColor: ChateoColors.grey,
-                      ),
-                    ],
+                  Padding(
+                    padding: const EdgeInsets.symmetric(
+                      vertical: ChateoDimens.dimen_20,
+                    ),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        SocialMediaButton(
+                          iconPath: ChateDrawables.getFacebookIconDrawable(),
+                          borderColor: ChateoColors.grey,
+                        ),
+                        const SizedBox(
+                          width: ChateoDimens.dimen_16,
+                        ),
+                        SocialMediaButton(
+                          iconPath: ChateDrawables.getGoogleIconDrawable(),
+                          borderColor: ChateoColors.grey,
+                          onTap: () => context
+                              .read<SignInBloc>()
+                              .add(const LogInWithGoogleEvent()),
+                        ),
+                        const SizedBox(
+                          width: ChateoDimens.dimen_16,
+                        ),
+                        SocialMediaButton(
+                          iconPath: ChateDrawables.getAppleIconDrawable(),
+                          color: Colors.white,
+                          borderColor: ChateoColors.grey,
+                        ),
+                      ],
+                    ),
                   ),
                   const OnboardingDivider(),
-                  const OnboardingButton(),
+                  OnboardingButton(
+                    onTap: () => AppNavigator.navigateToSignUp(context),
+                  ),
                   TextButton(
-                    onPressed: () => Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => const LoginPage())),
+                    onPressed: () => AppNavigator.navigateToLogIn(context),
                     child: RichText(
                       text: TextSpan(
                         text: 'Existing account? ',

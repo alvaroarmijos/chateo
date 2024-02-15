@@ -3,7 +3,12 @@ import 'package:flutter/material.dart';
 import '../../../core/ui/ui.dart';
 
 class OnboardingButton extends StatelessWidget {
-  const OnboardingButton({super.key});
+  const OnboardingButton({
+    super.key,
+    this.onTap,
+  });
+
+  final VoidCallback? onTap;
 
   @override
   Widget build(BuildContext context) {
@@ -14,6 +19,7 @@ class OnboardingButton extends StatelessWidget {
           backgroundColor: Colors.white,
           textStyle: const TextStyle(
             fontWeight: FontWeight.bold,
+            fontSize: 16,
           ),
           foregroundColor: Colors.black,
           shape: RoundedRectangleBorder(
@@ -28,8 +34,8 @@ class OnboardingButton extends StatelessWidget {
       child: SizedBox(
         width: double.infinity,
         child: ElevatedButton(
-          onPressed: () {},
-          child: const Text('Sign up withn mail'),
+          onPressed: onTap,
+          child: const Text('Sign up with mail'),
         ),
       ),
     );

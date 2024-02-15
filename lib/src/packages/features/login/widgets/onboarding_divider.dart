@@ -12,10 +12,8 @@ class OnboardingDivider extends StatelessWidget {
 
     return Row(
       children: [
-        Expanded(
-          child: Divider(
-            color: dividerColor.withOpacity(0.2),
-          ),
+        const Expanded(
+          child: Divider(),
         ),
         Padding(
           padding:
@@ -24,14 +22,11 @@ class OnboardingDivider extends StatelessWidget {
             'OR',
             style: Theme.of(context)
                 .textTheme
-                .labelLarge
+                .labelMedium
                 ?.copyWith(color: dividerColor),
           ),
         ),
-        Expanded(
-            child: Divider(
-          color: dividerColor.withOpacity(0.2),
-        )),
+        const Expanded(child: Divider()),
       ],
     );
   }
