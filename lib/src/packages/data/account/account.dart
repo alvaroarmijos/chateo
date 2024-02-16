@@ -1,5 +1,6 @@
 library account;
 
+export './lib/src/application/check_user_login_use_case.dart';
 export './lib/src/application/get_user_use_case.dart';
 export './lib/src/application/log_in_use_case.dart';
 export './lib/src/application/log_out_use_case.dart';

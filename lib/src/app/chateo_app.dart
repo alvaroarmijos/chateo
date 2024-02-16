@@ -2,7 +2,6 @@ import 'package:chateo/src/app/bloc/app_bloc.dart';
 import 'package:chateo/src/app/di/di.dart';
 import 'package:chateo/src/app/navigator/chateo_flow.dart';
 import 'package:chateo/src/app/navigator/onboarding_flow.dart';
-import 'package:chateo/src/packages/core/ui/lib/src/res/theme.dart';
 import 'package:chateo/src/packages/core/ui/ui.dart';
 import 'package:chateo/src/packages/features/login/login.dart';
 import 'package:flutter/material.dart';
