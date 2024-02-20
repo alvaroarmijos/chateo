@@ -20,4 +20,30 @@ class ChatApiClient {
             : {})
         .map((event) => ChatUserDto.fromJsonArray(event.values.toList()));
   }
+
+  Stream<List<MessageDto>> getChat(String chatId) {
+    return _firebaseDatabase.ref('chats').child('$chatId/messages').onValue.map(
+          (event) => MessageDto.fromJsonArray(
+            event.snapshot.value != null
+                ? (event.snapshot.value as Map).values.toList()
+                : [],
+          ),
+        );
+  }
+
+  Future<void> sendMessages(
+    String chatUid,
+    String msg,
+    String uid,
+  ) {
+    return _firebaseDatabase
+        .ref('chats')
+        .child('$chatUid/messages')
+        .push()
+        .set({
+      'message': msg,
+      'sentBy': uid,
+      'messageDate': DateTime.now().toIso8601String(),
+    });
+  }
 }

@@ -2,6 +2,7 @@ import 'package:chateo/src/packages/core/ui/ui.dart';
 import 'package:chateo/src/packages/data/chat/chat.dart';
 import 'package:chateo/src/packages/features/chat_detail/src/widgets/message_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 
 class ChatContent extends StatelessWidget {
   const ChatContent({
@@ -20,18 +21,20 @@ class ChatContent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final listController = ScrollController();
-    // scroll(listController);
+    scroll(listController);
 
     return SafeArea(
       child: ListView.builder(
         controller: listController,
-        padding: const EdgeInsets.only(bottom: ChateoDimens.dimen_60),
+        padding: const EdgeInsets.symmetric(horizontal: ChateoDimens.dimen_20)
+            .copyWith(
+          bottom: ChateoDimens.dimen_60,
+        ),
         itemCount: messages.length,
         itemBuilder: (context, index) => MessageWidget(
           msg: messages[index].msg,
-          // date: messages[index].date,
-          // mySelf: messages[index].sentBy == myUid,
-          mySelf: false,
+          date: messages[index].date,
+          mySelf: messages[index].sentBy == myUid,
           name: name,
           photoUrl: photoUrl,
         ),
@@ -39,13 +42,13 @@ class ChatContent extends StatelessWidget {
     );
   }
 
-  // void scroll(ScrollController listController) {
-  //   SchedulerBinding.instance.addPostFrameCallback((_) {
-  //     listController.animateTo(
-  //       listController.position.maxScrollExtent,
-  //       duration: const Duration(seconds: 1),
-  //       curve: Curves.fastOutSlowIn,
-  //     );
-  //   });
-  // }
+  void scroll(ScrollController listController) {
+    SchedulerBinding.instance.addPostFrameCallback((_) {
+      listController.animateTo(
+        listController.position.maxScrollExtent,
+        duration: const Duration(milliseconds: 600),
+        curve: Curves.fastOutSlowIn,
+      );
+    });
+  }
 }

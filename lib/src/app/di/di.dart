@@ -3,6 +3,9 @@ import 'package:chateo/src/packages/data/account/account.dart';
 import 'package:chateo/src/packages/data/account/lib/src/infrastructure/user/user_mapper.dart';
 import 'package:chateo/src/packages/data/chat/chat.dart';
 import 'package:chateo/src/packages/data/chat/lib/src/domain/chat_user/chat_user_repository.dart';
+import 'package:chateo/src/packages/data/chat/lib/src/domain/message/message_repository.dart';
+import 'package:chateo/src/packages/data/chat/lib/src/infrastructure/message/message_repository_impl.dart';
+import 'package:chateo/src/packages/features/chat_detail/src/bloc/chat_bloc.dart';
 import 'package:chateo/src/packages/features/home/home.dart';
 import 'package:chateo/src/packages/features/login/login.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -43,8 +46,8 @@ Future<void> init() async {
   /// UseCases
   sl.registerLazySingleton(() => GetChatUserUseCase(sl()));
   // sl.registerLazySingleton(() => UpdateUserStatusUseCase(sl()));
-  // sl.registerLazySingleton(() => GetChatUseCase(sl()));
-  // sl.registerLazySingleton(() => SendMessageUseCase(sl()));
+  sl.registerLazySingleton(() => GetChatUseCase(sl()));
+  sl.registerLazySingleton(() => SendMessageUseCase(sl()));
 
   /// Infrastructure
   sl.registerLazySingleton(() => const ChatUserMapper());
@@ -53,10 +56,8 @@ Future<void> init() async {
         sl(),
       ));
   sl.registerLazySingleton(() => const MessageMapper());
-  // sl.registerLazySingleton<MessageRepository>(() => MessageRepositoryImpl(
-  //       sl(),
-  //       sl(),
-  //     ));
+  sl.registerLazySingleton<MessageRepository>(
+      () => MessageRepositoryImpl(sl(), sl()));
 
   sl.registerLazySingleton(() => ChatApiClient(sl()));
 
@@ -85,7 +86,7 @@ Future<void> init() async {
 
   /// Chat
   /// //Bloc
-  // sl.registerFactory(() => ChatBloc(sl(), sl()));
+  sl.registerFactory(() => ChatBloc(sl(), sl()));
 
   /// Profile
   /// //Bloc
