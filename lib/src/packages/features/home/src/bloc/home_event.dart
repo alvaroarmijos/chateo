@@ -4,7 +4,7 @@ sealed class HomeEvent extends Equatable {
   const HomeEvent();
 
   @override
-  List<Object> get props => [];
+  List<Object?> get props => [];
 }
 
 final class GetChatUsersEvent extends HomeEvent {
@@ -12,10 +12,12 @@ final class GetChatUsersEvent extends HomeEvent {
 }
 
 final class UpdateUserStatusEvent extends HomeEvent {
-  const UpdateUserStatusEvent(this.status);
+  const UpdateUserStatusEvent(
+    this.status,
+  );
 
   final bool status;
 
   @override
-  List<Object> get props => [status];
+  List<Object?> get props => [status];
 }

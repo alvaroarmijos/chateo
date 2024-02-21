@@ -12,9 +12,11 @@ dependencies:
   firebase_auth: ^4.17.4
   firebase_core: ^2.25.4
   firebase_database: ^10.4.5
+  firebase_messaging: ^14.7.16
   flutter:
     sdk: flutter
   flutter_bloc: ^8.1.4
+  flutter_local_notifications: ^16.3.2
   fluttertoast: ^8.2.4
   get_it: ^7.6.7
   google_sign_in: ^6.2.1

@@ -5,13 +5,18 @@ import 'package:chateo/src/packages/data/chat/chat.dart';
 import 'package:chateo/src/packages/data/chat/lib/src/domain/chat_user/chat_user_repository.dart';
 import 'package:chateo/src/packages/data/chat/lib/src/domain/message/message_repository.dart';
 import 'package:chateo/src/packages/data/chat/lib/src/infrastructure/message/message_repository_impl.dart';
+import 'package:chateo/src/packages/data/device/device.dart';
 import 'package:chateo/src/packages/features/chat_detail/src/bloc/chat_bloc.dart';
 import 'package:chateo/src/packages/features/home/home.dart';
 import 'package:chateo/src/packages/features/login/login.dart';
+import 'package:chateo/src/packages/features/profile/profile.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:get_it/get_it.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+
+import '../notifications/notifications_setup.dart';
 
 final sl = GetIt.instance;
 
@@ -45,7 +50,7 @@ Future<void> init() async {
   ///
   /// UseCases
   sl.registerLazySingleton(() => GetChatUserUseCase(sl()));
-  // sl.registerLazySingleton(() => UpdateUserStatusUseCase(sl()));
+  sl.registerLazySingleton(() => UpdateUserStatusUseCase(sl()));
   sl.registerLazySingleton(() => GetChatUseCase(sl()));
   sl.registerLazySingleton(() => SendMessageUseCase(sl()));
 
@@ -64,7 +69,7 @@ Future<void> init() async {
   /// Device
   ///
   /// UseCases
-  // sl.registerLazySingleton(() => GetFcmTokenUseCase(sl()));
+  sl.registerLazySingleton(() => GetFcmTokenUseCase(sl()));
 
   /// Features
 
@@ -82,7 +87,7 @@ Future<void> init() async {
 
   /// Home
   /// //Bloc
-  sl.registerFactory(() => HomeBloc(sl(), sl()));
+  sl.registerFactory(() => HomeBloc(sl(), sl(), sl(), sl()));
 
   /// Chat
   /// //Bloc
@@ -90,14 +95,14 @@ Future<void> init() async {
 
   /// Profile
   /// //Bloc
-  // sl.registerFactory(() => ProfileBloc(sl(), sl(), sl()));
+  sl.registerFactory(() => ProfileBloc(sl(), sl(), sl()));
 
   ///Notifications
-  // sl.registerLazySingleton(() => NotificationSetup(sl()));
+  sl.registerLazySingleton(() => NotificationSetup(sl()));
 
   //External
   sl.registerLazySingleton(() => FirebaseAuth.instance);
   sl.registerLazySingleton(() => FirebaseDatabase.instance);
   sl.registerLazySingleton(() => GoogleSignIn());
-  // sl.registerLazySingleton(() => FirebaseMessaging.instance);
+  sl.registerLazySingleton(() => FirebaseMessaging.instance);
 }

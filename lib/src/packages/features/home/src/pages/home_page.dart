@@ -12,10 +12,29 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  late final AppLifecycleListener _listener;
+
+  late HomeBloc _bloc;
+
   @override
   void initState() {
-    context.read<HomeBloc>().add(const GetChatUsersEvent());
+    _bloc = context.read<HomeBloc>()
+      ..add(const GetChatUsersEvent())
+      ..add(const UpdateUserStatusEvent(true));
+
+    _listener = AppLifecycleListener(
+      onResume: () => _bloc.add(const UpdateUserStatusEvent(true)),
+      onPause: () => _bloc.add(const UpdateUserStatusEvent(false)),
+      onDetach: () => _bloc.add(const UpdateUserStatusEvent(false)),
+    );
+
     super.initState();
+  }
+
+  @override
+  void dispose() {
+    _listener.dispose();
+    super.dispose();
   }
 
   @override

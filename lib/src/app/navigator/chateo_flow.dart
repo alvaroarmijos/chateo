@@ -1,7 +1,9 @@
 import 'package:chateo/src/app/di/di.dart';
 import 'package:chateo/src/app/navigator/app_navigator.dart';
+import 'package:chateo/src/app/notifications/notifications_setup.dart';
 import 'package:chateo/src/packages/features/chat_detail/chat_detail.dart';
 import 'package:chateo/src/packages/features/home/home.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -9,16 +11,11 @@ import '../../packages/features/profile/profile.dart';
 
 final navigatorKey = GlobalKey<NavigatorState>();
 
-class ChateoFlow extends StatelessWidget {
+class ChateoFlow extends StatefulWidget {
   const ChateoFlow({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    return Navigator(
-      key: navigatorKey,
-      onGenerateRoute: _routeFactory,
-    );
-  }
+  State<ChateoFlow> createState() => _ChateoFlowState();
 
   static Route<dynamic> _routeFactory(RouteSettings settings) {
     final args = settings.arguments as Map<String, dynamic>?;
@@ -66,5 +63,28 @@ class ChateoFlow extends StatelessWidget {
           ),
         );
     }
+  }
+}
+
+class _ChateoFlowState extends State<ChateoFlow> {
+  @override
+  void initState() {
+    FirebaseMessaging.onMessage
+        .listen(sl<NotificationSetup>().showFlutterNotification);
+
+    FirebaseMessaging.onMessageOpenedApp.listen((event) {
+      //TODO: add events
+      print('A new oppenApp Event');
+    });
+
+    super.initState();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Navigator(
+      key: navigatorKey,
+      onGenerateRoute: ChateoFlow._routeFactory,
+    );
   }
 }

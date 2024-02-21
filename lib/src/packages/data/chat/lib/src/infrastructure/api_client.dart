@@ -46,4 +46,19 @@ class ChatApiClient {
       'messageDate': DateTime.now().toIso8601String(),
     });
   }
+
+  Future<void> updateUserStatus(
+    String uid,
+    String name,
+    bool status,
+    String? photoUrl,
+    String? token,
+  ) {
+    return _firebaseDatabase.ref('status').child(uid).update({
+      'name': name,
+      'status': status,
+      'token': token,
+      if (photoUrl != null) 'photoUrl': photoUrl
+    });
+  }
 }

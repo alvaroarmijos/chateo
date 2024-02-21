@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:chateo/src/packages/data/account/account.dart';
+import 'package:chateo/src/packages/data/chat/chat.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -11,7 +12,7 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
   ProfileBloc(
     this._getUserUseCase,
     this._logOutUseCase,
-    // this._updateUserStatusUseCase,
+    this._updateUserStatusUseCase,
   ) : super(const ProfileLoading()) {
     on<GetUserEvent>(_onGetUserEvent);
     on<LogOutEvent>(_onLogOutEvent);
@@ -19,7 +20,7 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
 
   final GetUserUseCase _getUserUseCase;
   final LogOutUseCase _logOutUseCase;
-  // final UpdateUserStatusUseCase _updateUserStatusUseCase;
+  final UpdateUserStatusUseCase _updateUserStatusUseCase;
 
   FutureOr<void> _onGetUserEvent(
     GetUserEvent event,
@@ -37,6 +38,20 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
     LogOutEvent event,
     Emitter<ProfileState> emit,
   ) {
+    // String uid,
+    // String name,
+    // bool status,
+    // String? photoUrl,
+    return emit.onEach(
+      _updateUserStatusUseCase(
+        event.user.uid,
+        event.user.name ?? "",
+        false,
+        event.user.photoUrl,
+        null,
+      ).then((_) => _logOutUseCase()).asStream(),
+      onData: (_) {},
+    );
     //   return emit.onEach(
     //     _updateUserStatusUseCase(
     //       event.user.uid,

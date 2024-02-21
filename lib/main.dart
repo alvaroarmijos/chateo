@@ -1,4 +1,5 @@
 import 'package:chateo/firebase_options.dart';
+import 'package:chateo/src/app/notifications/notifications_setup.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
@@ -13,6 +14,8 @@ void main() async {
   );
 
   await di.init();
+
+  await di.sl<NotificationSetup>().setupFlutterNotifications();
 
   runApp(const ChateoApp());
 }
