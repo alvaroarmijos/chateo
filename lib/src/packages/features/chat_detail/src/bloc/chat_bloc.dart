@@ -28,6 +28,7 @@ class ChatBloc extends Bloc<ChatEvent, ChatState> {
           getChatId(event.myUid, event.chatUserId),
           event.msg,
           event.myUid,
+          event.chatUserId,
         ).asStream(),
         onData: (_) {});
   }

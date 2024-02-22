@@ -11,11 +11,17 @@ class MessageRepositoryImpl implements MessageRepository {
   );
 
   @override
-  Future<void> sendMessage(String chatUid, String msg, String uid) =>
+  Future<void> sendMessage(
+    String chatUid,
+    String msg,
+    String sentBy,
+    String sentTo,
+  ) =>
       _chatApiClient.sendMessages(
         chatUid,
         msg,
-        uid,
+        sentBy,
+        sentTo,
       );
 
   @override

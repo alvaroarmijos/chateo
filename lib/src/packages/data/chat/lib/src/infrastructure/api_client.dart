@@ -34,7 +34,8 @@ class ChatApiClient {
   Future<void> sendMessages(
     String chatUid,
     String msg,
-    String uid,
+    String sentBy,
+    String sentTo,
   ) {
     return _firebaseDatabase
         .ref('chats')
@@ -42,7 +43,8 @@ class ChatApiClient {
         .push()
         .set({
       'message': msg,
-      'sentBy': uid,
+      'sentBy': sentBy,
+      'sentTo': sentTo,
       'messageDate': DateTime.now().toIso8601String(),
     });
   }
