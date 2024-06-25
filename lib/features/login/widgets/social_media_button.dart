@@ -14,7 +14,9 @@ class SocialMediaWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () => onTap?.call(),
-      child: Image.asset(icon),
+      child: Image.asset(
+        icon,
+      ),
     );
   }
 }

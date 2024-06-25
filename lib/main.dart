@@ -1,4 +1,5 @@
-import 'package:chateo/features/login/pages/onboarding_page.dart';
+import 'package:chateo/core/ui/ui.dart';
+import 'package:chateo/features/login/pages/pages.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -10,8 +11,9 @@ class MainApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
-      home: OnboardingPage(),
+    return MaterialApp(
+      theme: AppTheme.light,
+      home: const SignUpPage(),
     );
   }
 }
