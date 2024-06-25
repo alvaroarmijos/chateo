@@ -1,4 +1,5 @@
 import 'package:chateo/core/ui/ui.dart';
+import 'package:chateo/features/login/pages/pages.dart';
 import 'package:chateo/features/login/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 
@@ -86,12 +87,26 @@ class OnboardingPage extends StatelessWidget {
                           borderRadius: BorderRadius.circular(16),
                         ),
                       ),
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const SignUpPage(),
+                          ),
+                        );
+                      },
                       child: const Text('Sign up with mail'),
                     ),
                   ),
                   TextButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const LoginPage(),
+                        ),
+                      );
+                    },
                     child: RichText(
                       text: TextSpan(
                         text: 'Existing account? ',

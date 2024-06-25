@@ -43,7 +43,6 @@ class LoginPage extends StatelessWidget {
             ),
             textAlign: TextAlign.center,
           ),
-          const Spacer(),
           Padding(
             padding: const EdgeInsets.symmetric(
               vertical: 24,
