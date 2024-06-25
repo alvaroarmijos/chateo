@@ -1,7 +1,9 @@
 import 'package:chateo/core/ui/ui.dart';
+import 'package:chateo/features/login/bloc/sign_in/sign_in_bloc.dart';
 import 'package:chateo/features/login/pages/pages.dart';
 import 'package:chateo/features/login/widgets/widgets.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class OnboardingPage extends StatelessWidget {
   const OnboardingPage({super.key});
@@ -67,6 +69,11 @@ class OnboardingPage extends StatelessWidget {
                       ),
                       SocialMediaWidget(
                         icon: Drawables.getGoogleIcon(),
+                        onTap: () {
+                          context
+                              .read<SignInBloc>()
+                              .add(SignInWithGoogleEvent());
+                        },
                       ),
                       const SizedBox(
                         width: 16,
