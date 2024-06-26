@@ -1,4 +1,8 @@
+import 'package:chateo/app/bloc/auth_bloc.dart';
+import 'package:chateo/app/di.dart';
 import 'package:chateo/core/ui/ui.dart';
+import 'package:chateo/features/home/bloc/home_bloc.dart';
+import 'package:chateo/features/home/page/home_page.dart';
 import 'package:chateo/features/login/bloc/sign_in/sign_in_bloc.dart';
 import 'package:chateo/features/login/pages/pages.dart';
 import 'package:chateo/firebase_options.dart';
@@ -11,6 +15,7 @@ void main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
+  initializeDependencies();
   runApp(const MainApp());
 }
 
@@ -19,11 +24,25 @@ class MainApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      theme: AppTheme.light,
-      home: BlocProvider(
-        create: (context) => SignInBloc(),
-        child: const OnboardingPage(),
+    return BlocProvider(
+      create: (context) => AuthBloc()..add(GetUser()),
+      child: MaterialApp(
+        theme: AppTheme.light,
+        home: BlocBuilder<AuthBloc, AuthState>(
+          builder: (context, state) {
+            if (state.existUser) {
+              return BlocProvider(
+                create: (context) => HomeBloc(),
+                child: const HomePage(),
+              );
+            } else {
+              return BlocProvider(
+                create: (context) => SignInBloc(),
+                child: const OnboardingPage(),
+              );
+            }
+          },
+        ),
       ),
     );
   }

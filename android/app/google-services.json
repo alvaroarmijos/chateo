@@ -1,6 +1,7 @@
 {
   "project_info": {
     "project_number": "1098582556387",
+    "firebase_url": "https://chateo-c2d0e-default-rtdb.firebaseio.com",
     "project_id": "chateo-c2d0e",
     "storage_bucket": "chateo-c2d0e.appspot.com"
   },

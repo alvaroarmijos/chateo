@@ -3,7 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
 class AuthServiceImpl extends AuthService {
-  final firebase = FirebaseAuth.instance;
+  final _firebase = FirebaseAuth.instance;
 
   @override
   Future<void> loginWithGoogle() async {
@@ -21,8 +21,9 @@ class AuthServiceImpl extends AuthService {
     );
 
     // Once signed in, return the UserCredential
-    final res = await firebase.signInWithCredential(credential);
-
-    print(res);
+    await _firebase.signInWithCredential(credential);
   }
+
+  @override
+  Stream<User?> get currentUser => _firebase.authStateChanges();
 }
