@@ -1,3 +1,5 @@
+import 'package:chateo/app/bloc/auth_bloc.dart';
+import 'package:chateo/core/ui/widgets/chateo_avatar.dart';
 import 'package:chateo/features/home/bloc/home_bloc.dart';
 import 'package:chateo/features/home/widgets/widgets.dart';
 import 'package:flutter/material.dart';
@@ -13,13 +15,22 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   @override
   void initState() {
-    context.read<HomeBloc>().add(GetChatUsers());
+    final userState = context.read<AuthBloc>().state;
+    final homeBloc = context.read<HomeBloc>();
+
+    if (userState.existUser) {
+      homeBloc
+        ..add(GetChatUsersEvent(uid: userState.user!.uid))
+        ..add(UpdateUserStatusEvent(status: true, user: userState.user!));
+    }
+
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
     final textTheme = Theme.of(context).textTheme;
+    final user = context.read<AuthBloc>().state.user;
 
     return Scaffold(
       backgroundColor: Colors.black,
@@ -39,11 +50,13 @@ class _HomePageState extends State<HomePage> {
                 ),
                 Text(
                   'Home',
-                  style: textTheme.titleLarge,
+                  style: textTheme.titleLarge?.copyWith(
+                    color: Colors.white,
+                  ),
                 ),
-                const CircleAvatar(
-                  backgroundImage: NetworkImage(
-                      'https://photo-cdn2.icons8.com/OCUxgrB3qzbk934tC2nTmEl7VlvF-7f3LJ1fQ9HFuZA/rs:fit:576:384/czM6Ly9pY29uczgu/bW9vc2UtcHJvZC5l/eHRlcm5hbC9hMmE0/Mi82ODE1ODM3MTQ5/YTI0ZmE2YmEzYzBm/Njg0MDMyZjJlMy5q/cGc.webp'),
+                ChateoAvatar(
+                  name: user?.displayName ?? '',
+                  photoUrl: user?.photoURL,
                 ),
               ],
             ),

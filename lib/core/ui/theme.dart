@@ -9,24 +9,32 @@ class AppTheme {
   );
 
   static const TextTheme _textTheme = TextTheme(
-      displayLarge: TextStyle(
-        fontSize: 70,
-        color: Colors.black,
-        fontWeight: FontWeight.w400,
-      ),
-      labelLarge: TextStyle(
-        fontSize: 18,
-        color: Colors.black,
-        fontWeight: FontWeight.normal,
-      ),
-      bodyMedium: TextStyle(
-        fontSize: 12,
-        color: Colors.black,
-        fontWeight: FontWeight.normal,
-      ),
-      bodyLarge: TextStyle(
-        color: Colors.black,
-      ));
+    displayLarge: TextStyle(
+      fontSize: 70,
+      color: Colors.black,
+      fontWeight: FontWeight.w400,
+    ),
+    labelLarge: TextStyle(
+      fontSize: 18,
+      color: Colors.black,
+      fontWeight: FontWeight.normal,
+    ),
+    bodyMedium: TextStyle(
+      fontSize: 12,
+      color: Colors.black,
+      fontWeight: FontWeight.normal,
+    ),
+    bodySmall: TextStyle(
+      color: Colors.black,
+      fontWeight: FontWeight.normal,
+    ),
+    bodyLarge: TextStyle(
+      color: Colors.black,
+    ),
+    titleLarge: TextStyle(
+      color: Colors.black,
+    ),
+  );
 
   static final _elevatedButtonThemeData = ElevatedButtonThemeData(
     style: ElevatedButton.styleFrom(

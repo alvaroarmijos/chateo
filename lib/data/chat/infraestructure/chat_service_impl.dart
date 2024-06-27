@@ -21,4 +21,20 @@ class ChatServiceImpl extends ChatService {
       },
     ).map((data) => ChatUser.fromJsonArray(data.values.toList()));
   }
+
+  @override
+  Future<void> updateUserStatus(
+    String uid,
+    String name,
+    String? photoUrl,
+    bool status,
+  ) {
+    return _firebaseDatabase.ref("status").child(uid).update(
+      {
+        'name': name,
+        'photoUrl': photoUrl,
+        'status': status,
+      },
+    );
+  }
 }
