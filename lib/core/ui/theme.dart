@@ -34,6 +34,9 @@ class AppTheme {
     titleLarge: TextStyle(
       color: Colors.black,
     ),
+    titleMedium: TextStyle(
+      color: Colors.black,
+    ),
   );
 
   static final _elevatedButtonThemeData = ElevatedButtonThemeData(

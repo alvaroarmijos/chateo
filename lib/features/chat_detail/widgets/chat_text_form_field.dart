@@ -1,8 +1,23 @@
+import 'package:chateo/app/bloc/auth_bloc.dart';
 import 'package:chateo/core/ui/colors.dart';
+import 'package:chateo/features/chat_detail/bloc/chat_bloc.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
-class ChatTextFormField extends StatelessWidget {
-  const ChatTextFormField({super.key});
+class ChatTextFormField extends StatefulWidget {
+  const ChatTextFormField({
+    super.key,
+    required this.chatUserId,
+  });
+
+  final String chatUserId;
+
+  @override
+  State<ChatTextFormField> createState() => _ChatTextFormFieldState();
+}
+
+class _ChatTextFormFieldState extends State<ChatTextFormField> {
+  final TextEditingController _chatController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -18,6 +33,7 @@ class ChatTextFormField extends StatelessWidget {
             children: [
               Expanded(
                 child: TextFormField(
+                  controller: _chatController,
                   minLines: 1,
                   maxLines: 5,
                   textInputAction: TextInputAction.newline,
@@ -45,7 +61,20 @@ class ChatTextFormField extends StatelessWidget {
                 ),
               ),
               FloatingActionButton.small(
-                onPressed: () {},
+                onPressed: () {
+                  final msg = _chatController.text;
+                  final uid = context.read<AuthBloc>().state.user?.uid ?? '';
+
+                  if (msg.isNotEmpty) {
+                    context.read<ChatBloc>().add(SendMessageEvent(
+                          chatUserId: widget.chatUserId,
+                          msg: msg,
+                          uid: uid,
+                        ));
+
+                    _chatController.clear();
+                  }
+                },
                 shape: const CircleBorder(),
                 elevation: 0,
                 child: const Icon(Icons.send),

@@ -1,6 +1,7 @@
 import 'package:chateo/app/bloc/auth_bloc.dart';
 import 'package:chateo/app/di.dart';
 import 'package:chateo/core/ui/ui.dart';
+import 'package:chateo/features/chat_detail/bloc/chat_bloc.dart';
 import 'package:chateo/features/home/bloc/home_bloc.dart';
 import 'package:chateo/features/home/page/home_page.dart';
 import 'package:chateo/features/login/bloc/sign_in/sign_in_bloc.dart';
@@ -24,15 +25,26 @@ class MainApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => AuthBloc()..add(GetUser()),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(
+          create: (context) => AuthBloc()..add(GetUser()),
+        ),
+        BlocProvider(
+          create: (context) => ChatBloc(),
+        ),
+      ],
       child: MaterialApp(
         theme: AppTheme.light,
         home: BlocBuilder<AuthBloc, AuthState>(
           builder: (context, state) {
             if (state.existUser) {
-              return BlocProvider(
-                create: (context) => HomeBloc(),
+              return MultiBlocProvider(
+                providers: [
+                  BlocProvider(
+                    create: (context) => HomeBloc(),
+                  ),
+                ],
                 child: const HomePage(),
               );
             } else {

@@ -1,6 +1,5 @@
 import 'package:chateo/data/chat/domain/chat_user.dart';
-import 'package:chateo/features/chat_detail/widgets/app_bar_title.dart';
-import 'package:chateo/features/chat_detail/widgets/chat_text_form_field.dart';
+import 'package:chateo/features/chat_detail/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 
 class ChatDetailPage extends StatelessWidget {
@@ -19,11 +18,16 @@ class ChatDetailPage extends StatelessWidget {
           chatUser: chatUser,
         ),
       ),
-      body: const Stack(
+      body: Stack(
         children: [
           // List de mensajes
+          ListMessages(
+            chatUser: chatUser,
+          ),
           // Widget
-          ChatTextFormField(),
+          ChatTextFormField(
+            chatUserId: chatUser.uid,
+          ),
         ],
       ),
     );
