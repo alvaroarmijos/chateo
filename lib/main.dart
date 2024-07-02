@@ -1,11 +1,13 @@
 import 'package:chateo/app/bloc/auth_bloc.dart';
 import 'package:chateo/app/di.dart';
+import 'package:chateo/app/notifications/notifications_setup.dart';
 import 'package:chateo/core/ui/ui.dart';
 import 'package:chateo/features/chat_detail/bloc/chat_bloc.dart';
 import 'package:chateo/features/home/bloc/home_bloc.dart';
 import 'package:chateo/features/home/page/home_page.dart';
 import 'package:chateo/features/login/bloc/sign_in/sign_in_bloc.dart';
 import 'package:chateo/features/login/pages/pages.dart';
+import 'package:chateo/features/profile/cubit/profile_cubit.dart';
 import 'package:chateo/firebase_options.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -17,6 +19,7 @@ void main() async {
     options: DefaultFirebaseOptions.currentPlatform,
   );
   initializeDependencies();
+  await getIt<NotificationsSetup>().setupFlutterNotifications();
   runApp(const MainApp());
 }
 
@@ -33,6 +36,9 @@ class MainApp extends StatelessWidget {
         BlocProvider(
           create: (context) => ChatBloc(),
         ),
+        BlocProvider(
+          create: (context) => ProfileCubit(),
+        )
       ],
       child: MaterialApp(
         theme: AppTheme.light,

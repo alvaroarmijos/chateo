@@ -1,3 +1,4 @@
+import 'package:chateo/app/notifications/notifications_setup.dart';
 import 'package:chateo/data/account/domain/auth_service.dart';
 import 'package:chateo/data/account/infraestructure/auth_service_impl.dart';
 import 'package:chateo/data/chat/domain/chat_service.dart';
@@ -13,4 +14,5 @@ void initializeDependencies() {
   getIt.registerSingleton<AuthService>(AuthServiceImpl());
   getIt.registerSingleton<ChatService>(ChatServiceImpl());
   getIt.registerSingleton<MessageService>(MessageServiceImpl());
+  getIt.registerSingleton(NotificationsSetup());
 }

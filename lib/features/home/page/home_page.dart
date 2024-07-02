@@ -1,7 +1,11 @@
 import 'package:chateo/app/bloc/auth_bloc.dart';
+import 'package:chateo/app/di.dart';
+import 'package:chateo/app/notifications/notifications_setup.dart';
 import 'package:chateo/core/ui/widgets/chateo_avatar.dart';
 import 'package:chateo/features/home/bloc/home_bloc.dart';
 import 'package:chateo/features/home/widgets/widgets.dart';
+import 'package:chateo/features/profile/pages/profile_page.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -13,6 +17,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  late final AppLifecycleListener _listener;
   @override
   void initState() {
     final userState = context.read<AuthBloc>().state;
@@ -22,6 +27,18 @@ class _HomePageState extends State<HomePage> {
       homeBloc
         ..add(GetChatUsersEvent(uid: userState.user!.uid))
         ..add(UpdateUserStatusEvent(status: true, user: userState.user!));
+
+      _listener = AppLifecycleListener(
+        onResume: () => homeBloc
+            .add(UpdateUserStatusEvent(status: true, user: userState.user!)),
+        onPause: () => homeBloc
+            .add(UpdateUserStatusEvent(status: false, user: userState.user!)),
+        onDetach: () => homeBloc
+            .add(UpdateUserStatusEvent(status: false, user: userState.user!)),
+      );
+
+      FirebaseMessaging.onMessage
+          .listen(getIt<NotificationsSetup>().showFlutterNotification);
     }
 
     super.initState();
@@ -54,9 +71,19 @@ class _HomePageState extends State<HomePage> {
                     color: Colors.white,
                   ),
                 ),
-                ChateoAvatar(
-                  name: user?.displayName ?? '',
-                  photoUrl: user?.photoURL,
+                GestureDetector(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (_) => const ProfilePage(),
+                      ),
+                    );
+                  },
+                  child: ChateoAvatar(
+                    name: user?.displayName ?? '',
+                    photoUrl: user?.photoURL,
+                  ),
                 ),
               ],
             ),

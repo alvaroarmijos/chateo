@@ -19,7 +19,8 @@ class Message {
       .map(
         (e) => Message.fromJson(e),
       )
-      .toList();
+      .toList()
+    ..sort((a, b) => a.date.compareTo(b.date));
 
   Map<String, dynamic> toJson() => {
         "message": msg,

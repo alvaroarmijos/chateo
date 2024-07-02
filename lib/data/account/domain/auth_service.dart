@@ -6,4 +6,7 @@ abstract class AuthService {
 
   // Get current user
   Stream<User?> get currentUser;
+
+  // Logout
+  Future<void> logOut();
 }

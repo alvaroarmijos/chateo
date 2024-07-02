@@ -36,7 +36,10 @@ class MessageWidget extends StatelessWidget {
           if (!mySelf)
             Padding(
               padding: const EdgeInsets.only(right: 16),
-              child: ChateoAvatar(name: userName),
+              child: ChateoAvatar(
+                name: userName,
+                photoUrl: photoUrl,
+              ),
             ),
           Stack(
             children: [

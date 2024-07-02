@@ -26,4 +26,14 @@ class AuthServiceImpl extends AuthService {
 
   @override
   Stream<User?> get currentUser => _firebase.authStateChanges();
+
+  @override
+  Future<void> logOut() async {
+    await Future.wait(
+      [
+        _firebase.signOut(),
+        GoogleSignIn().signOut(),
+      ],
+    );
+  }
 }

@@ -2,6 +2,12 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>CLIENT_ID</key>
+	<string>1098582556387-bcmlfq0p1a3omvjftloo7o7so722i009.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.1098582556387-bcmlfq0p1a3omvjftloo7o7so722i009</string>
+	<key>ANDROID_CLIENT_ID</key>
+	<string>1098582556387-qssi49u2md1kg373mha12cl3c1h5aq5f.apps.googleusercontent.com</string>
 	<key>API_KEY</key>
 	<string>AIzaSyCJ1wio7iyB1fCfhRSMflJEoeBcnwIbA40</string>
 	<key>GCM_SENDER_ID</key>
@@ -26,5 +32,7 @@
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
 	<string>1:1098582556387:ios:410f8bd2db2f23df4fcfd6</string>
+	<key>DATABASE_URL</key>
+	<string>https://chateo-c2d0e-default-rtdb.firebaseio.com</string>
 </dict>
 </plist>

@@ -3,6 +3,7 @@ import 'package:chateo/data/chat/domain/chat_user.dart';
 import 'package:chateo/features/chat_detail/bloc/chat_bloc.dart';
 import 'package:chateo/features/chat_detail/widgets/widgets.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class ListMessages extends StatefulWidget {
@@ -35,7 +36,12 @@ class _ListMessagesState extends State<ListMessages> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<ChatBloc, ChatState>(
+    final scrollController = ScrollController();
+
+    return BlocConsumer<ChatBloc, ChatState>(
+      listener: (context, state) {
+        scrollLastMessage(scrollController);
+      },
       builder: (context, state) {
         if (state.messages == null) {
           return const Center(
@@ -46,6 +52,7 @@ class _ListMessagesState extends State<ListMessages> {
         return Padding(
           padding: const EdgeInsets.all(20),
           child: ListView.builder(
+              controller: scrollController,
               itemCount: state.messages!.length,
               itemBuilder: (context, index) {
                 final message = state.messages![index];
@@ -61,5 +68,15 @@ class _ListMessagesState extends State<ListMessages> {
         );
       },
     );
+  }
+
+  void scrollLastMessage(ScrollController scrollController) {
+    SchedulerBinding.instance.addPostFrameCallback((_) {
+      scrollController.animateTo(
+        scrollController.position.maxScrollExtent,
+        duration: const Duration(seconds: 1),
+        curve: Curves.fastOutSlowIn,
+      );
+    });
   }
 }
