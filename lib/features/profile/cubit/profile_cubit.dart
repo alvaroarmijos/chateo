@@ -17,6 +17,7 @@ class ProfileCubit extends Cubit<void> {
       user.displayName ?? '',
       user.photoURL,
       false,
+      null,
     );
     return authService.logOut();
   }

@@ -27,6 +27,7 @@ class ChatBloc extends Bloc<ChatEvent, ChatState> {
       event.msg,
       date,
       event.uid,
+      event.chatUserId,
     );
   }
 

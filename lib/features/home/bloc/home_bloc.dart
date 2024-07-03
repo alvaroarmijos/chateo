@@ -4,6 +4,7 @@ import 'package:bloc/bloc.dart';
 import 'package:chateo/data/chat/domain/chat_service.dart';
 import 'package:chateo/data/chat/domain/chat_user.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:get_it/get_it.dart';
 
 part 'home_event.dart';
@@ -34,12 +35,15 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
   FutureOr<void> _onUpdateUserStatusEvent(
     UpdateUserStatusEvent event,
     Emitter<HomeState> emit,
-  ) {
+  ) async {
+    final token = await FirebaseMessaging.instance.getToken();
+
     chatService.updateUserStatus(
       event.user.uid,
       event.user.displayName ?? '',
       event.user.photoURL,
       event.status,
+      token,
     );
   }
 }

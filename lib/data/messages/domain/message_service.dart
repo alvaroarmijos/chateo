@@ -5,7 +5,8 @@ abstract class MessageService {
     String chatId,
     String msg,
     String date,
-    String uid,
+    String sentBy,
+    String sentTo,
   );
 
   Stream<List<Message>> getChat(String chatId);

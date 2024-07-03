@@ -10,13 +10,15 @@ class MessageServiceImpl extends MessageService {
     String chatId,
     String msg,
     String date,
-    String uid,
+    String sentBy,
+    String sentTo,
   ) {
     return _firebaseDatabase.ref('chats').child(chatId).push().set(
       {
         'message': msg,
         'messageDate': date,
-        'sentBy': uid,
+        'sentBy': sentBy,
+        'sentTo': sentTo,
         'read': false,
       },
     );

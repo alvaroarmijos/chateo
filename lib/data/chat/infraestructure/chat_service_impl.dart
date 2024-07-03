@@ -28,12 +28,14 @@ class ChatServiceImpl extends ChatService {
     String name,
     String? photoUrl,
     bool status,
+    String? token,
   ) {
     return _firebaseDatabase.ref("status").child(uid).update(
       {
         'name': name,
         'photoUrl': photoUrl,
         'status': status,
+        'token': token,
       },
     );
   }

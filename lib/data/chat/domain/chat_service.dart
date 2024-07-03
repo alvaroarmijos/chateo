@@ -8,5 +8,6 @@ abstract class ChatService {
     String name,
     String? photoUrl,
     bool status,
+    String? token,
   );
 }
